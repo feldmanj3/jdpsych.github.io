@@ -1,0 +1,164 @@
+<html>
+<head>
+    <title>Simple Breath by John</title>
+    <link rel="icon" href="images/logo_breath.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <style>
+                    @media (max-width: 767px) {
+                        body{
+      
+                        }
+                        .container {
+                            margin: 0 !important;
+                            padding-right: 0 !important;
+                        }
+                        .card {
+                            margin-top: 0 !important;
+                        }
+}
+        body {
+
+        }
+        .card {margin-top: 20px;}
+        .card-img-top {height: 150px;
+        object-fit: cover;
+        object-position: top;
+        }
+        .row {
+        }
+        #defaultCanvas0 {display: none;}
+    </style>
+</head>
+<body>
+<script>
+var diam = 125;
+let inOut = 0;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  //createCanvas(400, 400);
+}
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
+function draw() {
+    background(255);
+	ellipse(windowWidth/2,300,diam) // X, Y, starting diameter
+    fill(181,229,245);
+    stroke(248,253,254);
+    strokeWeight(20);
+	
+	if(diam > 250){
+    sleep(4000);
+	inOut = 2;
+
+	}
+	if(diam < 10){
+    sleep(4000);
+	inOut = 1;
+	}
+	
+	if(inOut === 1){
+	diam++
+	}
+	
+	if(inOut === 2){
+	diam--
+	}
+}
+    
+    </script>
+    
+<div class="container" id="description_hello">
+<div class="row justify-content-center">
+<div class="card" style="width: 500px;">
+    <div class="row justify-content-center">
+    <h1 style="float:left;" class="text-center text-muted pt-2">Simple Breath</h1>
+    <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/259/leaf-fluttering-in-wind_1f343.png" width ="50px" height="50px" class="mt-2 ml-2"/></div>
+    <h6 class="text-center text-muted pb-2">designed and programmed by John DeJesus</h1>
+  <img class="card-img-top" src="https://i.pinimg.com/originals/a4/79/60/a47960613fb7a90ed129d2cda388c296.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">About this web application</h5>
+      <p class="card-text"><i>Box breathing</i>, popularizd by the US NAVY SEALS, is a deep breathing technique that can help you relax and regulate your stress hormones. This app works on every electronic device with a modern browser. Use for as long as necessary.<br />
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Choose your music (Optional)</label>
+  </div>
+  <select class="custom-select" id="music_selection">
+    <option selected>Silence is golden (None)</option>
+    <option value="1">Rain</option>
+    <option value="2">Forest</option>
+    <option value="3">Ocean Waves</option>
+  </select>
+      <small>Note: It's recommended to lower your volume first, then adjust as needed.</small>
+</div>
+        <b>Instructions:</b> Count to 4 seconds for each of the following:
+      <ul>
+          <li class="mt-2">Inhaling (as circle expands)</li>
+          <li>Hold (when circle is at its biggest)</li>
+          <li>Exhaling (as circle deflates)</li>
+          <li>Hold (when circle is at its smallest)</li>
+      </ul>
+
+      </p>
+    <div class="text-center"><a href="#" onclick="startRelax()" class="btn btn-primary align-center">Start</a>
+  </div></div>
+ 
+</div>
+
+    </div>
+    <h6 class="text-center mt-2 mb-2"><a href="https://johndejesus.com" class="text-muted">Return to johndejesus.com</a></h6>
+</div>
+<audio id="Rain">
+<source src="assets/music/rain.mp3" type="audio/mpeg">
+</audio>
+<audio id="Forest">
+<source src="assets/music/forest.mp3" type="audio/mpeg">
+</audio>
+<audio id="Waves">
+<source src="assets/music/waves.mp3" type="audio/mpeg">
+</audio>
+<script>
+function startRelax(){
+const music = document.getElementById("music_selection").value;
+const music_rain = document.getElementById("Rain");
+const music_forest = document.getElementById("Forest");
+const music_waves = document.getElementById("Waves");
+
+//console.log(music);
+document.getElementById("description_hello").style.display = "none";
+document.body.style.backgroundColor = "white";
+document.getElementById("defaultCanvas0").style.display = "initial";
+inOut = 1;
+    
+if (music === "1") {
+    music_rain.loop = true;
+    music_rain.load();
+    music_rain.play();
+} else if (music === "2") {
+    music_forest.loop = true;
+    music_forest.load();
+    music_forest.play();
+} else if (music === "3") {
+    music_waves.loop = true;
+    music_waves.load();
+    music_waves.play();
+}
+
+}
+</script>
+</body>
+</html>

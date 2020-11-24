@@ -336,6 +336,17 @@ visitorProfile.push({"suicide_thoughts":document.getElementById("suicide_thought
         #step2 {display: none;}
         #step3 {display: none;}
         
+        @media (max-width: 767px) {
+            .container {
+    margin: 0 !important;
+    padding: 10px !important;
+                overflow-x: hidden !important;
+} 
+        body {
+    overflow-x: hidden !important;
+            
+}
+        }
         
         
         .card {margin-top: 20px;}
@@ -347,7 +358,7 @@ visitorProfile.push({"suicide_thoughts":document.getElementById("suicide_thought
         }
         #defaultCanvas0 {display: none;}
         .card-main {border: none !important;}
-        .breadcrumb {background-color: #d6ffff;}
+        .breadcrumb {background-color: #eeffea;}
     </style>
 </head>
 <body>
@@ -392,7 +403,13 @@ visitorProfile.push({"suicide_thoughts":document.getElementById("suicide_thought
       <div class="card-body">
 <div id="step1">
     <h5 class="card-title">About this web application</h5>
-      <p class="card-text">YouMatter is a self-administered, risk assessment and mental health resource for children and adolescents. Components include: peer vignette, calming techniques, psychoeducation, safety planning, crisis service lists, and suggested therapeutic programs. Information is <b>personalized</b> based on demographic factors, potential psychological symptoms, and level of risk.<br/><br/><span class="text-danger">This application is a prototype created for learning purposes. It has not been validated nor should it be used for clinical purposes.</span><br />
+      <p class="card-text">
+                  <div class="card-body mb-2" style="background-color: #ffebeb !important;">
+              <p class="card-text">
+          
+          YouMatter is a self-administered, suicide risk assessment and mental health resource for children and adolescents. Components include: peer vignette, calming techniques, psychoeducation, safety planning, crisis service lists, and suggested therapeutic programs. Information is <b>personalized</b> based on demographic factors, potential psychological symptoms, and level of risk.<br/><br/><span class="text-danger">This application is a prototype created for learning purposes. It has not been validated nor should it be used for clinical purposes.</span><br />
+                      </p></div>
+                  
 <p><b>Instructions:</b> Complete the following to receive personalized support.</p>
       
       <h6>Tell us about yourself (Optional) <small></br/>Note: You are assumed as a South East Asian female (above 11 y/o) if you select no options.</small></h6>

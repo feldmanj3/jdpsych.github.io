@@ -1,0 +1,1096 @@
+<html>
+<head>
+    <title>YouMatter by John</title>
+    <link rel="icon" href="images/logo_youmatter.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
+    <script>
+    let visitorProfile = [];
+    let symptomProfile = [];
+    var vignettes = {
+        blackmale: {
+            name: "Daniel",
+            img: "images/vignettes/blackmale.jpg",
+            phrase1: "Change is never easy,",
+            phrase2: "but always possible.",
+            phrase3: "- Barrack Obama",
+            text: "I've been through some mental health struggles myself. It takes a lot from you. You got to deal with these hostile environments while going through different stages in your life. People in my life weren't all that supportive. But I knew I had to get some help. We're stronger when we work with our communities."
+        },
+        blackfemale: {
+            name: "Fatima",
+            img: "images/vignettes/blackfemale.jpg",
+            phrase1: "No matter who you are,<br/>No matter where you come from,",
+            phrase2: "You are beautiful.",
+            phrase3: "- Michelle Obama",
+            text: "People think I'm supposed to always be strong, so it makes me feel guilty when I can't always be strong. My friends aren't as comfortable talking about mental health as I am. But I think it's important to open a dialogue because healing happens when we open up. And I found out that healing means something different for me than for others."
+        },
+        southeastasianmale: {
+            name: "Kane",
+            img: "images/vignettes/asianmale.jpg",
+            phrase1: "Mistakes are acceptable,",
+            phrase2: "if they result in moving forward.",
+            phrase3: "- Andrew Yang",
+            text: "I remember how all that mattered growing up was meeting my parent's standards. There's a lot of pressure to keep with traditions and to not feel negative emotions. It helped me a lot to talk about the things that are shamed in my community. Surprisingly, you learn a lot when you don't push it all down."
+        },
+        southeastasianfemale: {
+            name: "Suzi",
+            img: "images/vignettes/asianfemale.jpg",
+            phrase1: "Willpower is the most important,",
+            phrase2: "it rises from you heart.",
+            phrase3: "- Junko Tabei",
+            text: "There's a lot of shame and silence when it comes to mental illness in Asian communities. Sometimes, it's even considered strong to suppress negative feelings by my family and my friend's family. They think it will just go away. But once I realized that keeping it all inside isn't the answer, things started getting better once I opened up and started getting the help I need."
+        },
+        caucasianmale: {
+            name: "Tom",
+            img: "images/vignettes/caucasianmale.jpg",
+            phrase1: "The only thins to fear is, ",
+            phrase2: "fear itself.",
+            phrase3: "- Franklin D. Roosevelt",
+            text: "For a long time I was stressed too. I probably still don't handle stress as well as I could, but at some point I realized that my stress level doesn't have to be proportional to the amount of stressful things occurring in my life. It helped a lot to realize a lot of other people feel the same way."
+        },
+        caucasianfemale: {
+            name: "Sam",
+            img: "images/vignettes/caucasianfemale.jpg",
+            phrase1: "No one can make you feel inferior,",
+            phrase2: "without your consent.",
+            phrase3: "- Eleanor Roosevelt",
+            text: "I think it's normal to not be okay. I learned that you don't always have to be okay. It helped me a lot to stop trying to meet standards and trying to be perfect every day. It helps to remind myself that I can do this."
+        },
+    }
+
+function vignettePersonlization (){
+    if (visitorProfile[2]["ethnicity"] == 1 && visitorProfile[1]["gender"] == 1) {
+        document.getElementById("message-humane1").innerHTML = vignettes["blackmale"]["phrase1"];
+        document.getElementById("vignette_img").src = vignettes["blackmale"]["img"];;
+        document.getElementById("message-humane2").innerHTML = vignettes["blackmale"]["phrase2"];
+        document.getElementById("message-humane3").innerHTML = vignettes["blackmale"]["phrase3"];
+        document.getElementById("vignette_name").innerHTML = vignettes["blackmale"]["name"];
+        document.getElementById("vignette_text").innerHTML = vignettes["blackmale"]["text"];
+    }
+        else if (visitorProfile[2]["ethnicity"] == 1 && visitorProfile[1]["gender"] == 2) {
+                document.getElementById("message-humane1").innerHTML = vignettes["blackfemale"]["phrase1"];
+                    document.getElementById("vignette_img").src = vignettes["blackfemale"]["img"];;
+        document.getElementById("message-humane2").innerHTML = vignettes["blackfemale"]["phrase2"];
+        document.getElementById("message-humane3").innerHTML = vignettes["blackfemale"]["phrase3"];
+        document.getElementById("vignette_name").innerHTML = vignettes["blackfemale"]["name"];
+        document.getElementById("vignette_text").innerHTML = vignettes["blackfemale"]["text"];
+    }
+        else if (visitorProfile[2]["ethnicity"] == 7 && visitorProfile[1]["gender"] == 1) {
+                document.getElementById("message-humane1").innerHTML = vignettes["southeastasianmale"]["phrase1"];
+                    document.getElementById("vignette_img").src = vignettes["southeastasianmale"]["img"];;
+        document.getElementById("message-humane2").innerHTML = vignettes["southeastasianmale"]["phrase2"];
+        document.getElementById("message-humane3").innerHTML = vignettes["southeastasianmale"]["phrase3"];
+        document.getElementById("vignette_name").innerHTML = vignettes["southeastasianmale"]["name"];
+        document.getElementById("vignette_text").innerHTML = vignettes["southeastasianmale"]["text"];
+    }
+        else if (visitorProfile[2]["ethnicity"] == 7 && visitorProfile[1]["gender"] == 2) {
+                document.getElementById("message-humane1").innerHTML = vignettes["southeastasianfemale"]["phrase1"];
+                    document.getElementById("vignette_img").src = vignettes["southeastasianfemale"]["img"];;
+        document.getElementById("message-humane2").innerHTML = vignettes["southeastasianfemale"]["phrase2"];
+        document.getElementById("message-humane3").innerHTML = vignettes["southeastasianfemale"]["phrase3"];
+        document.getElementById("vignette_name").innerHTML = vignettes["southeastasianfemale"]["name"];
+        document.getElementById("vignette_text").innerHTML = vignettes["southeastasianfemale"]["text"];
+    }
+        else if (visitorProfile[2]["ethnicity"] == 10 && visitorProfile[1]["gender"] == 1) {
+                document.getElementById("message-humane1").innerHTML = vignettes["caucasianmale"]["phrase1"];
+                    document.getElementById("vignette_img").src = vignettes["caucasianmale"]["img"];
+        document.getElementById("message-humane2").innerHTML = vignettes["caucasianmale"]["phrase2"];
+        document.getElementById("message-humane3").innerHTML = vignettes["caucasianmale"]["phrase3"];
+        document.getElementById("vignette_name").innerHTML = vignettes["caucasianmale"]["name"];
+        document.getElementById("vignette_text").innerHTML = vignettes["caucasianmale"]["text"];
+    }
+        else if (visitorProfile[2]["ethnicity"] == 10 && visitorProfile[1]["gender"] == 2) {
+                document.getElementById("message-humane1").innerHTML = vignettes["caucasianfemale"]["phrase1"];
+                                document.getElementById("vignette_img").src = vignettes["caucasianfemale"]["img"];
+        document.getElementById("message-humane2").innerHTML = vignettes["caucasianfemale"]["phrase2"];
+        document.getElementById("message-humane3").innerHTML = vignettes["caucasianfemale"]["phrase3"];
+        document.getElementById("vignette_name").innerHTML = vignettes["caucasianfemale"]["name"];
+        document.getElementById("vignette_text").innerHTML = vignettes["caucasianfemale"]["text"];
+    } else {
+                document.getElementById("message-humane1").innerHTML = vignettes["blackfemale"]["phrase1"];
+                    document.getElementById("vignette_img").src = vignettes["blackfemale"]["img"];;
+        document.getElementById("message-humane2").innerHTML = vignettes["blackfemale"]["phrase2"];
+        document.getElementById("message-humane3").innerHTML = vignettes["blackfemale"]["phrase3"];
+        document.getElementById("vignette_name").innerHTML = vignettes["blackfemale"]["name"];
+        document.getElementById("vignette_text").innerHTML = vignettes["blackfemale"]["text"];
+    }
+
+}
+function blackFemale() {
+    visitorProfile[2]["ethnicity"] = 1;
+    visitorProfile[1]["gender"] = 2;
+    
+        symptomProfile.push(
+            {eating1:1},
+            {eating2:1},
+            {eating3:1},
+            {eating4:1},
+            {eating5:1},
+            {depression1:2},
+            {depression2:2},
+            {anxiety1:2},
+            {anxiety2:2},
+            {anxiety3:2},
+            {sud1:1},
+            {sud2:1},
+            {sud3:1},
+            {sud4:1},
+        )
+    
+            document.getElementById("step2").style.display = "none";
+               document.getElementById("crumb2").style.display = "none";
+                document.getElementById("step3").style.display = "initial";
+                document.getElementById("crumb3").style.display = "initial";
+    
+    
+    
+    vignettePersonlization();
+}
+function stepTwo() {
+    symptomProfile.push({"eating1":document.getElementById("eating1").value});
+    symptomProfile.push({"eating2":document.getElementById("eating2").value});
+    symptomProfile.push({"eating3":document.getElementById("eating3").value});
+    symptomProfile.push({"eating4":document.getElementById("eating4").value});
+    symptomProfile.push({"eating5":document.getElementById("eating5").value});
+    symptomProfile.push({"depression1":document.getElementById("depression1").value});
+    symptomProfile.push({"depression2":document.getElementById("depression2").value});
+    symptomProfile.push({"anxiety1":document.getElementById("anxiety1").value});
+    symptomProfile.push({"anxiety2":document.getElementById("anxiety2").value});
+    symptomProfile.push({"anxiety3":document.getElementById("anxiety3").value});
+    symptomProfile.push({"sud1":document.getElementById("sud1").value});
+    symptomProfile.push({"sud2":document.getElementById("sud2").value});
+    symptomProfile.push({"sud3":document.getElementById("sud3").value});
+    symptomProfile.push({"sud4":document.getElementById("sud4").value});
+    
+    var i;
+    for (i = 0; i < symptomProfile.length; i++) {
+    let x = i;
+    if (exist = Object.values(symptomProfile[x]).includes("Choose")) {
+        alert("Please make sure you select a choice for all questions.");
+        symptomProfile = [];
+        return false;
+    }
+    }
+    
+
+            document.getElementById("step2").style.display = "none";
+               document.getElementById("crumb2").style.display = "none";
+                document.getElementById("step3").style.display = "initial";
+                document.getElementById("crumb3").style.display = "initial";
+    
+    
+    
+    vignettePersonlization();
+}
+function calmingTechniques (){
+                document.getElementById("crumb_return").style.display = "initial";
+                document.getElementById("step3").style.display = "none";
+                document.getElementById("calmingtechniques").style.display = "initial";
+                window.scrollTo(0, 0);
+}
+        function psychoeducation (){
+            
+        if (symptomProfile[0]["eating1"] == 0 && symptomProfile[1]["eating2"] == 0 && symptomProfile[2]["eating3"] == 0 && symptomProfile[3]["eating4"] == 0 && symptomProfile[4]["eating5"] == 0 ) {
+            document.getElementById("education_eating").style.display = "none";
+        }
+        if (symptomProfile[5]["depression1"] < 2 && symptomProfile[6]["depression2"] < 2) {
+            document.getElementById("education_depression").style.display = "none";
+        }
+              if (symptomProfile[7]["anxiety1"] < 2 && symptomProfile[8]["anxiety2"] < 2 && symptomProfile[9]["anxiety3"] < 2) {
+            document.getElementById("education_anxiety").style.display = "none";
+        }
+                 if (symptomProfile[10]["sud1"] == 0 && symptomProfile[11]["sud2"] == 0 && symptomProfile[12]["sud3"] == 0 && symptomProfile[13]["sud4"] == 0) {
+            document.getElementById("education_psu").style.display = "none";
+        }
+              
+            
+                document.getElementById("crumb_return").style.display = "initial";
+                document.getElementById("step3").style.display = "none";
+                document.getElementById("psychoeducation").style.display = "initial";
+                window.scrollTo(0, 0);
+}   
+        function safetyPlan (){
+                            document.getElementById("crumb_return").style.display = "initial";
+                document.getElementById("step3").style.display = "none";
+                document.getElementById("safetyplan").style.display = "initial";
+                window.scrollTo(0, 0);
+}   
+        function therapyResources (){
+                            document.getElementById("crumb_return").style.display = "initial";
+                document.getElementById("step3").style.display = "none";
+                document.getElementById("therapyresources").style.display = "initial";
+                window.scrollTo(0, 0);
+}   
+        function crisisResources (){
+                            document.getElementById("crumb_return").style.display = "initial";
+                document.getElementById("step3").style.display = "none";
+                document.getElementById("crisisresources").style.display = "initial";
+                window.scrollTo(0, 0);
+}   
+function returnPersonalized (){
+                document.getElementById("calmingtechniques").style.display = "none";
+                document.getElementById("psychoeducation").style.display = "none";
+                    document.getElementById("safetyplan").style.display = "none";
+                    document.getElementById("therapyresources").style.display = "none";
+                    document.getElementById("crisisresources").style.display = "none";
+                document.getElementById("step3").style.display = "initial";
+                    document.getElementById("crumb_return").style.display = "none";
+} 
+function stepOne(){
+        
+    // Push the demographic factors
+    
+    visitorProfile.push({"age":document.getElementById("age").value});
+    visitorProfile.push({"gender":document.getElementById("gender").value});
+    visitorProfile.push({"ethnicity":document.getElementById("ethnicity").value});
+    
+    if (visitorProfile[0]["age"] == 1) {
+        alert("Please return when you are older or have adult supervision. Select '11 years old or above' when you have appropriate supervision or misselected your age.");
+        visitorProfile = [];
+        return false;
+    }
+
+    /*
+// Complete randomization &&
+Object.values(visitorProfile[1]["gender"]).includes("anonymous")
+Object.values(visitorProfile[2]["ethnicity"]).includes("anonymous")
+
+// Male randomization
+
+visitorProfile[1]["gender"] == 1 &&
+Object.values(visitorProfile[2]["ethnicity"]).includes("anonymous")
+
+// Female randomization
+
+visitorProfile[1]["gender"] == 2 &&
+Object.values(visitorProfile[2]["ethnicity"]).includes("anonymous")
+
+// Black randomization
+
+Object.values(visitorProfile[1]["gender"]).includes("anonymous") &&
+visitorProfile[2]["ethnicity"] == "1"
+
+// SE Asian randomization
+
+Object.values(visitorProfile[1]["gender"]).includes("anonymous") &&
+visitorProfile[2]["ethnicity"] == "7"
+
+// Caucasian randomization
+
+Object.values(visitorProfile[1]["gender"]).includes("anonymous") &&
+visitorProfile[2]["ethnicity"] == "10"
+*/   
+
+    // Push the risk assessment
+
+visitorProfile.push({"suicide_thoughts":document.getElementById("suicide_thoughts").checked});
+    visitorProfile.push({"suicide_plan":document.getElementById("suicide_plan").checked});
+ visitorProfile.push({"suicide_means":document.getElementById("suicide_means").checked});
+    visitorProfile.push({"suicide_time":document.getElementById("suicide_time").checked});
+
+    console.log(visitorProfile);
+    
+    if (visitorProfile[6]["suicide_time"] == true) {
+        document.getElementById("crumb1").style.display = "none";
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("imminentrisk").style.display = "initial";
+           //document.getElementById("description_hello").style.display = "none";
+    } else {
+        document.getElementById("step1").style.display = "none";
+                document.getElementById("crumb1").style.display = "none";
+                document.getElementById("step2").style.display = "initial";
+                document.getElementById("crumb2").style.display = "initial";
+    }
+    
+}
+        
+    </script>
+    
+    <style>
+                    @media (max-width: 767px) {
+                        body{
+      
+                        }
+                        .container {
+                            margin: 0 !important;
+                            padding-right: 0 !important;
+                        }
+                        .card {
+                            margin-top: 0 !important;
+                        }
+}
+        body {
+
+        }
+        #crumb1 {}
+        #crumb2 {display: none;}
+        #crumb3 {display: none;}
+        #crumb_return {display: none;}
+        step1 {display: none;}
+        #step2 {display: none;}
+        #step3 {display: none;}
+        
+        
+        
+        .card {margin-top: 20px;}
+        .card-img-top {
+        object-fit: cover;
+        object-position: top;
+        }
+        .row {
+        }
+        #defaultCanvas0 {display: none;}
+        .card-main {border: none !important;}
+        .breadcrumb {background-color: #d6ffff;}
+    </style>
+</head>
+<body>
+<a id="top"></a>
+    
+<div class="container" id="description_hello">
+<div class="row justify-content-center">
+<div class="card-main card" style="width: 500px;">
+    <a href="https://johndejesus.com/youmatter.html"><div class="row justify-content-center">
+    <h1 style="float:left;" class="text-center text-muted pt-2">YouMatter</h1>
+    <img src="images/logo_youmatter.png" width ="50px" height="50px" class="mt-2 ml-2"/></div></a>
+    <h6 class="text-center text-muted mb-4">designed and programmed by John DeJesus</h1>
+
+    <div id="crumb1">
+    <nav aria-label="breadcrumb"><small>
+  <ol class="breadcrumb mb-0"><b>Navigation:</b>&nbsp;&nbsp;
+    <li class="breadcrumb-item active" aria-current="page"><u>1. Risk Assessment</u></li>
+  </ol>
+</nav></small></div>
+        <div id="crumb2"><small>
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb mb-0"><b>Navigation:</b>&nbsp;&nbsp;
+    <li class="breadcrumb-item">1. Risk Assessment</li>
+    <li class="breadcrumb-item active" aria-current="page"><u>2. Screening</u></li>
+  </ol>
+</nav></small></div>
+        <div id="crumb3"><small>
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb mb-0"><b>Navigation:</b>&nbsp;&nbsp;
+    <li class="breadcrumb-item">1. Risk Assessment</li>
+    <li class="breadcrumb-item">2. Screening</li>
+    <li class="breadcrumb-item active" aria-current="page"><u>3. Personalized Info</u></li>
+  </ol>
+</nav></small></div>
+        <div class="mt-2 text-center bg-light" id="crumb_return">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item"><a onclick="returnPersonalized()" href="#personalizedinfo">Return to Personalized intervention and resources</a></li></li>
+  </ol>
+</nav></div>
+
+      <div class="card-body">
+<div id="step1">
+    <h5 class="card-title">About this web application</h5>
+      <p class="card-text">YouMatter is a self-administered, risk assessment and mental health resource for children and adolescents. Components include: peer vignette, calming techniques, psychoeducation, safety planning, crisis service lists, and suggested therapeutic programs. Information is <b>personalized</b> based on demographic factors, potential psychological symptoms, and level of risk.<br/><br/><span class="text-danger">This application is a prototype created for learning purposes. It has not been validated nor it should be used for clinical purposes.</span><br />
+<p><b>Instructions:</b> Complete the following to receive personalized support.</p>
+      
+      <h6>Tell us about yourself (Optional) <small></br/>Note: You are assumed as a black female (above 11 y/o) if you select no options.</small></h6>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+<label class="input-group-text" for="age">Age</label>
+  </div>
+  <select class="custom-select" id="age">
+    <option selected>I prefer to remain anonymous</option>
+    <option value="1">10 years old or younger</option>
+    <option value="2">11 years old or above</option>
+  </select>
+</div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+<label class="input-group-text" for="gender">Gender</label>
+  </div>
+  <select class="custom-select" id="gender">
+    <option selected>I prefer to remain anonymous</option>
+    <option value="2">I identify as female</option>
+    <option value="1">I identify as male</option>
+    <option value="3" disabled>Non-binary</option>
+    <option value="4" disabled>Transgender</option>
+    <option value="5" disabled>Other</option>
+  </select>
+</div>
+      
+      
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+<label class="input-group-text" for="ethnicity">Ethnicity</label>
+  </div>
+  <select class="custom-select" id="ethnicity">
+    <option selected>I prefer to remain anonymous</option>
+    <option value="1">Black</option>
+    <option value="2" disabled>Indingenous</option>
+    <option value="3" disabled>Hispanic</option>
+    <option value="4" disabled>Hawaiian or Pacific Islander</option>
+    <option value="5" disabled>East Asian</option>
+    <option value="6" disabled>South Asian</option>
+    <option value="7">Southeast Asian</option>
+    <option value="8" disabled>African</option>
+    <option value="9" disabled>Middle Eastern</option>
+    <option value="10">Caucasian</option>
+  </select>
+</div>
+<h6>Safety Checklist (Select all that apply)</h6>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="suicide_thoughts">
+  <label class="form-check-label" for="suicide_thoughts">
+    Are you thinking about suicide?
+  </label>
+</div>
+      
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="suicide_plan">
+  <label class="form-check-label" for="suicide_plan">
+    Do you have a plan for completing suicide?
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="suicide_means">
+  <label class="form-check-label" for="suicide_means">
+    Do you have access or the means to completing the suicide plan?
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="suicide_time">
+  <label class="form-check-label" for="suicide_time">
+    If you have a firm time set, is it within 48 hours?
+  </label>
+</div>
+      <p><br/>We are here to help. None of your information will be stored.</p>
+
+      </p>
+ 
+            <div class="text-center mt-3"><a href="#" onclick="stepOne()" class="btn btn-primary align-center">Send</a>
+  </div>
+          </div> <!-- ends the step 1 -->
+    <div id="step2">
+    <h5 class="card-title">Risk assessment</h5>
+    <p class="card-text">
+        <div class="alert alert-warning" role="alert">
+  <b>Note from John:</b> Visitors wouldn't ordinarily see this box. For your convenience, click <button type="button" onclick="blackFemale()" class="btn btn-warning" style="padding: 2px !important; padding-top: 0px !important;">here</button> to move to the next step.<br/></br/>This will have the program assume you are a black female (older than 11 y/o) who potentially has anxiety, depression, disordered eating, and problematic substance use.
+</div>
+    <b>Instructions:</b> Complete the below questions as honestly and accurately as you can: 
+                  <label class="my-1 mr-2" for="eating1">Do you make yourself Sick because you feel uncomfortably full?</label>
+  <select class="custom-select my-1 mr-sm-2" id="eating1">
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+    
+                      <label class="my-1 mr-2" for="eating2">Do you worry that you have lost Control over how much you eat?</label>
+  <select class="custom-select my-1 mr-sm-2" id="eating2">
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+    
+                      <label class="my-1 mr-2" for="eating3">Have you recently lost more than One stone (14 lb) in a 3-month period?</label>
+  <select class="custom-select my-1 mr-sm-2" id="eating3">
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+    
+                      <label class="my-1 mr-2" for="eating4">Do you believe yourself to be Fat when others say you are too thin?</label>
+  <select class="custom-select my-1 mr-sm-2" id="eating4">
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+    
+                      <label class="my-1 mr-2" for="eating5">Would you say that Food dominates your life?</label>
+  <select class="custom-select my-1 mr-sm-2" id="eating5" required>
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+        <br/><br/>
+        <b>Important:</b><br/>For this next section, choose what best describes how much (or how often) you have been bothered by each problem during the past TWO (2) WEEKS for <u>each</u> question.<br/><br/>
+    During the past TWO (2) WEEKS, how much (or how often) have you...
+        <br/><br/>
+<!--Depression-->
+    
+     <label class="my-1 mr-2" for="depression1">Had less fun doing things than you used to?</label>
+  <select class="custom-select my-1 mr-sm-2" id="depression1">
+    <option selected>Choose</option>
+    <option value="1">None (None at all)</option>
+    <option value="2" >Slight (Rare, less than a day or two)</option>
+    <option value="3" >Mild (Several days)</option>
+    <option value="4" >Moderate (More than half the days)</option>
+    <option value="5" >Severe (nearly every day)</option>
+  </select>
+    
+              <label class="my-1 mr-2" for="depression2">Felt sad or depressed for several hours?</label>
+  <select class="custom-select my-1 mr-sm-2" id="depression2">
+    <option selected>Choose</option>
+    <option value="1">None (None at all)</option>
+    <option value="2" >Slight (Rare, less than a day or two)</option>
+    <option value="3" >Mild (Several days)</option>
+    <option value="4" >Moderate (More than half the days)</option>
+    <option value="5" >Severe (nearly every day)</option>
+  </select>
+    
+
+    
+    <!--Anxiety-->
+    
+
+    
+              <label class="my-1 mr-2" for="anxiety1">Felt nervous, anxious, or scared?</label>
+  <select class="custom-select my-1 mr-sm-2" id="anxiety1">
+    <option selected>Choose</option>
+    <option value="1">None (None at all)</option>
+    <option value="2" >Slight (Rare, less than a day or two)</option>
+    <option value="3" >Mild (Several days)</option>
+    <option value="4" >Moderate (More than half the days)</option>
+    <option value="5" >Severe (nearly every day)</option>
+  </select>
+    
+              <label class="my-1 mr-2" for="anxiety2">Not been able to stop worrying?</label>
+  <select class="custom-select my-1 mr-sm-2" id="anxiety2">
+    <option selected>Choose</option>
+    <option value="1">None (None at all)</option>
+    <option value="2" >Slight (Rare, less than a day or two)</option>
+    <option value="3" >Mild (Several days)</option>
+    <option value="4" >Moderate (More than half the days)</option>
+    <option value="5" >Severe (nearly every day)</option>
+  </select>
+    
+          <label class="my-1 mr-2" for="anxiety3">Not been able to do things you wanted to or should have done, because they made you feel nervous?</label>
+  <select class="custom-select my-1 mr-sm-2" id="anxiety3">
+    <option selected>Choose</option>
+    <option value="1">None (None at all)</option>
+    <option value="2" >Slight (Rare, less than a day or two)</option>
+    <option value="3" >Mild (Several days)</option>
+    <option value="4" >Moderate (More than half the days)</option>
+    <option value="5" >Severe (nearly every day)</option>
+  </select>
+    
+
+    
+    <!--SUD-->
+    
+              <label class="my-1 mr-2" for="sud1">Had an alcoholic beverage (beer, wine, liquor, etc.)?</label>
+  <select class="custom-select my-1 mr-sm-2" id="sud1">
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+    
+              <label class="my-1 mr-2" for="sud2">Smoked a cigarette, a cigar, or pipe, or used snuff or chewing tobacco?</label>
+  <select class="custom-select my-1 mr-sm-2" id="sud2">
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+    
+              <label class="my-1 mr-2" for="sud3">Used drugs like marijuana, cocaine or crack, club drugs (like Ecstasy), hallucinogens (like LSD), heroin, inhalants or solvents (like glue), or methamphetamine (like speed)?</label>
+  <select class="custom-select my-1 mr-sm-2" id="sud3">
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+    
+              <label class="my-1 mr-2" for="sud4">Used any medicine without a doctor’s prescription to get high or change the way you feel (e.g., painkillers [like Vicodin], stimulants [like Ritalin or Adderall], sedatives or tranquilizers [like sleeping pills or Valium], or steroids?</label>
+  <select class="custom-select my-1 mr-sm-2" id="sud4">
+    <option selected>Choose</option>
+    <option value="1">Yes</option>
+    <option value="0" >No</option>
+  </select>
+    
+
+        
+            <div class="text-center mt-3"><a href="#" onclick="stepTwo()" class="btn btn-primary align-center">Send</a>
+  </div>
+    
+    
+    </p>
+ </div> <!-- end of step2 -->
+<div id="step3">
+    <p class="card-text">
+        
+        <style>
+        
+        #message-humane1 {
+  margin-top: 25px;
+  font-size: 21px;
+  text-align: center;
+  animation: fadein 3s;
+  -moz-animation: fadein 3s;
+  /* Firefox */
+  -webkit-animation: fadein 3s;
+  /* Safari and Chrome */
+  -o-animation: fadein 3s;
+  /* Opera */
+}
+       #message-humane2 {
+  margin-top: 25px;
+  font-size: 21px;
+  text-align: center;
+  animation: fadein 6s;
+  -moz-animation: fadein 6s;
+  /* Firefox */
+  -webkit-animation: fadein 6s;
+  /* Safari and Chrome */
+  -o-animation: fadein 6s;
+  /* Opera */
+}
+                   #message-humane3 {
+  margin-top: 25px;
+  font-size: 21px;
+  text-align: center;
+  animation: fadein 10s;
+  -moz-animation: fadein 10s;
+  /* Firefox */
+  -webkit-animation: fadein 10s;
+  /* Safari and Chrome */
+  -o-animation: fadein 10s;
+  /* Opera */
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadein {
+
+  /* Firefox */
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+
+  /* Safari and Chrome */
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadein {
+
+  /* Opera */
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+        </style>
+        
+        <blockquote class="blockquote text-center mb-5">
+
+            <h3 class="font-italic font-weight-bold mt-5" style="color: babyblue !important;"><span id="message-humane1">You are not alone.</span><br/>
+                <span id="message-humane2">You have inherent value.</span><br/>
+                <span id="message-humane3">You have strength for reaching out.</span></h3>
+        </blockquote>
+    <hr/>
+    <H2 class="pt-5 pb-3 text-center">Meet <span id="vignette_name"></span>.</H2>
+    
+        <div class="card">
+
+    <img class="card-img-top" id="vignette_img">
+  <div class="card-body">
+
+    
+    <p class="card-text" id="vignette_text"></p>
+  </div>
+</div>
+    <div class="mt-5 mb-3">&nbsp;</div>
+   
+    <hr /><a id="personalizedinfo"></a>
+        <div class="text-center mt-5 mb-5">
+                <p><h5 class="text-underline text-muted">Personalized intervention and resources</h5>
+    Which best describes your current needs?<br/><small>Don’t worry, you can return to this page after selecting one.</small></p></div>
+    
+    <style>
+    button.intervention-button:hover > span {
+        color: white !important;
+        }</style>
+<button type="button" class="intervention-button shadow-sm btn btn-outline-secondary btn-block" onclick="calmingTechniques()"><span class="text-primary font-weight-bold">Calming Techniques 😌</span><br/>"I want to soothe my fight-or-flight system."</button>
+    
+    <button type="button" class="intervention-button shadow-sm btn btn-outline-secondary btn-block" onclick="psychoeducation()"><span class="text-success font-weight-bold">Psychoeducation 🎓</span><br/>"I want to learn more about my distress."</button>
+    
+    <button type="button" class="intervention-button shadow-sm btn btn-outline-secondary btn-block" onclick="safetyPlan()"><span class="text-warning font-weight-bold">Safety Plan 📒</span><br/>"I am not in immediate danger, but want to plan ahead."</button>
+    
+    <button type="button" class="intervention-button shadow-sm btn btn-outline-secondary btn-block" onclick="therapyResources()"><span class="text-info font-weight-bold">Therapeutic Resources 👩‍</span><br/>"I want to learn more about professional support."</button>
+    
+    <button type="button" class="intervention-button shadow-sm btn btn-outline-danger btn-block" onclick="crisisResources()"><span class="text-danger font-weight-bold">Call, text, or chat with a crisis service 📞</span><br/>"I strongly feel I need to talk to someone."<br/><span class="font-italic">It's OK to not be OK. It's OK to ask for help.</span></button>
+
+      </p>
+    </div> <!-- end of step 3 -->
+
+    <style>
+        #calmingtechniques {display: none;}
+        #psychoeducation {display: none;}
+        #safetyplan {display: none;}
+        #therapyresources {display: none;}
+        #crisisresources {display: none;}
+        #imminentrisk {display: none;}
+    
+    </style>
+    <div id="calmingtechniques">
+    <h5 class="card-title">Calming Techniques</h5>
+        <p class="card-text">These techiques and activities can help you calm down immediately and in the long-term.<br/><br/>
+            
+            <b>Immediate techniques:</b>
+        <ul>
+            <li>Cold water: In order to calm down quickly, try holding your breath and putting your face in a bowl of cold water or holding a cold pack on your eyes and cheeks for at least 30 seconds.</li>
+                <li>Intense exercise: Exercising intensely will help your body get rid of negative energy that can sometimes be stored from strong emotions. Get rid of this energy by running, walking at a fast pace, doing jumping jacks, etc. Exercise naturally releases endorphins which will help combat any negative emotions like anger, anxiety, or sadness.</li>
+                <li><a href="https://johndejesus.com/simplebreath.html">Box breathing</a> - A deep breathing exercise to calm down your fight-or-flight system</li>
+                <li><a href="https://kidshelpphone.ca/get-info/tension-release-exercise">Tension Release</a> - Focusing on flexing muscles can help relax you</li>
+                <li><a href="https://www.evergreenyfs.org/Youth%20Anxiety%20Handouts.pdf">Grounding</a> - This exercise will help restore your attention to the present moment</li>
+                <li>Imagery or Prayer: Imagine a relaxing environment or pray</li>
+        </ul>
+            
+            <b>Long-term activities and habits:</b>
+        <ul>
+            <li>Positive emotions: Make yourself feel something different by provoking humor or happiness</li>
+    <li>Positive activities: Enjoying hobbies or helping others</li>
+    <li>Build meaning or purpose: Do something that matters to you, your family, or community</li>
+    </ul>
+    
+    
+    <b>References:</b>
+    https://manhattanpsychologygroup.com/dialectical-behavior-therapy-dbt-distress-tolerance-skills-tipp-skills/<br/>
+    https://www.delraycenter.com/common-dialectical-behavior-therapy-acronyms/<br/>
+            
+        
+        </p>
+    
+    </div>
+      <div id="safetyplan">
+    <h5 class="card-title">Safety Planning</h5>
+        <p class="card-text">
+          When are are in crisis, we are not always thinking clearly. Preparing a safety plan in advance will help guide you when experiencing thoughts of self-harm or suicide. Think of it like knowing where the fire exits and extinguishers are!<br/><br/>
+            <b>What <i>exactly</i> is a safety plan?</b><br/>
+            There are usually five components to a safety plan:
+            <ol>
+            <li><b>Warning signs:</b> Your warning signs in the future may prevent things from escalating when they feel this way.</li>
+            <li><b>Internal coping methods:</b> What has helped you in the past when you’ve felt this way. What activities can distract you from your thoughts.</li>
+            <li><b>Social contacts</b> who can distract you from the crisis and family members or friends who can offer support.</li>
+            <li><b>Professional contacts</b> and agencies to contact for help.</li>
+            <li><b>Safe environment:</b> Maintaining a safe environment and limiting access to dangerous items.</li>
+            </ol>
+<b>I'm ready to safety plan. Where can I make one?</b>
+          <ul>
+          <li><a href="https://kidshelpphone.ca/get-info/safety-planner">Interactive Safety Planner</a> by Kids Help Phone</li>
+          <li><a href="https://suicidepreventionlifeline.org/wp-content/uploads/2016/08/Brown_StanleySafetyPlanTemplate.pdf">Printable Safety Plan</a> by Suicide Prevention Lifeline</li></ul>
+          <b>References:</b><br/>
+          https://www.suicideinfo.ca/resource/safety-plans/<br/>
+          https://cmha.ca/blogs/wspd2019<br/>
+          </p>
+    </div>
+      <div id="therapyresources">
+    <h5 class="card-title">Therapeutic Resources</h5>
+        <p class="card-text">Everyone needs help at some point. Luckily, online mental health and well-being are becoming more popular, and some programs have become funded by the government. The following are free and online programs, and offered canada-wide (unless specified):
+        <br/><br/>  
+        <b>Mental health and well-being programs:</b>
+            <ul><li>
+                <a href="https://bounceback.cmha.ca/">BounceBack</a> - BounceBack® is a free skill-building program managed by the Canadian Mental Health Association (CMHA). It is designed to help adults and youth 15+ manage low mood, mild to moderate depression and anxiety, stress or worry. Delivered over the phone with a coach and through online videos, you will get access to tools that will support you on your path to mental wellness.</li>
+                <li><a href="https://www.anxietycanada.com/resources/mindshift-cbt/">Mind Shift</a> - MindShift™ CBT uses scientifically proven strategies based on Cognitive Behavioural Therapy (CBT) to help you learn to relax and be mindful, develop more effective ways of thinking, and use active steps to take charge of your anxiety.</li>
+          <li><a href="https://www.mindbeacon.com/">Mind Beacon (Ontario)</a> - BEACON digital therapy assesses and provides care for a range of mental wellness issues including challenges related to managing stress, depression, anxiety, PTSD, chronic pain management, and insomnia.</li>
+          <li><a href="https://myicbt.com/home">AbilitiCBT (Ontario & Manitoba)</a> - AbilitiCBT is an internet-based cognitive behavioral therapy (iCBT) program that you can access from any device, any time. Cognitive behavioral therapy is one of the most effective forms of therapy. It works by helping you understand and change the thoughts, feelings and behaviors that are causing you problems. AbilitiCBT works the same way, but virtually. AbilitiCBT’s user-friendly platform makes it convenient to get help when you need it, where you need it. </li></ul>
+          </p>
+    </div>
+      <div id="crisisresources">
+    <h5 class="card-title">Crisis Service Resources</h5>
+        <p class="card-text">The following are crisis services across Canada. Please use <a href="https://ca.portal.gs/">Wellness Together Canada</a> for a greater list of mental heath resoruces and information.
+        <br/><br/>  
+        <b>Crisis Lines and Services:</b>
+            <ul>
+                <li><a href="https://blackyouth.ca/">Black Youth Helpline (Black)</a> - Black Youth Helpline serves all youth and specifically responds to the need for a Black youth specific service, positioned and resourced to promote access to professional, culturally appropriate support for youth, families and schools.</li>
+                <li>
+<a href="https://www.hopeforwellness.ca/">Hope for Wellness (Indingenous)</a> - The Hope for Wellness Help Line offers immediate mental health counselling and crisis intervention to all Indigenous peoples across Canada.</li>
+                <li><a href="https://www.youthline.ca/">Youth Line (LGBTQ+)</a> - Youth Line offers confidential and non-judgemental peer support through our telephone, text and chat services. Get in touch with a peer support volunteer from Sunday to Friday, 4:00PM to 9:30 PM.</li>
+                <li><a href="http://www.chimoservices.com/get-help/crisis-line">Chimo Crisis Line (Asian)</a> - Free, confidential and non-judgmental emotional support provided 8:00 am to midnight, seven days a week, by professionally trained volunteers.</li>
+                <li><a href="http://klinic.mb.ca/24-hr-crisis-line/">Klinic Crisis Line (Sexual Abuse)</a> - We are experiencing technical difficulties with our local numbers at the moment. If you are experiencing a crisis and need to talk to a crisis or sexual assault counsellor, please use our toll free numbers.</li>
+                <li><a href="https://nedic.ca/contact/">Nedic (Eating Disorders)</a> - Counselling support for eating disorders.</li>
+                <li><a href="https://www.ccsa.ca/addictions-treatment-helplines-canada">Addiction Treatments in Canada (Not a crisis service)</a> - List of services to help with substance use based on province.</li>
+                <li><a href="https://kidshelpphone.ca/">Kids Help Phone (All youth)</a> - Kids Help Phone is a Canadian charitable organization that provides 24/7 free confidential professional online and telephone counselling and volunteer-led, text-based support in English and French to youth across Canada. </li>
+
+  </ul>
+          </p>
+    </div>
+
+<div id="imminentrisk">
+    <h5 class="card-title">Imminent Risk</h5>
+        <p class="card-text">We have detected that you may be seriously considering suicide or currently conducting an attempt. You are not alone. You are valuable. You are strong. We can and will help you. Please contact one of these crisis services and explain to them you are feeling suicidal.
+        
+        <br/><br/>  
+        <b>Kids Help Phone's Crisis Lines and Services:</b>
+            <ul>
+    <li>Phone (24/7): 1-800-668-6868</li>
+                <li>Text (24/7): CONNECT to 686868</li>
+                <li>Chat (Not 24/7): <a href="https://kidshelpphone.ca/live-chat/">Live Chat</a></li>
+    </ul>
+            
+As you wait to connect with a crisis counsellor, please remove yourself from harm. Once you are safe, please practice the following breathing technique below to bring you back to calm. Suicide is not the answer.<br/><br/>
+            <img src="images/box_breathing.gif" class="mw-100"/>
+
+  </ul>
+          </p>
+    </div>
+    
+    <div id="psychoeducation">
+    <h5 class="card-title">Psychoeducation</h5>
+        <p class="card-text">
+        It's a step forward to learn about what is causing you distress.  YouMatter has prepared for you some basic information about <b>potential</b> psychological distress you may have based on the survey you completed earlier. The names for these symptoms of distress are to help doctors organize informations to best help you. <b>They do not define you.</b>       
+<br/><br/>
+<small>This is not a diagnostic tool. Please consult a qualified healthcare professional for assessment.</small>
+</p>
+    
+    <div id="accordion">
+  <div class="card" id="education_anxiety">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Anxiety
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+<b>What is Anxiety?</b><br/>
+Sometimes when we sense something is dangerous or threatening, we automatically go into a state called “anxious arousal”. This can happen when there is a real danger, but also when something simply feels dangerous, but really isn’t, such as giving an oral presentation in class, or…(give an example of something relevant to your child). Anxious arousal makes you feel jittery, on edge, and uncomfortable. It may also make it hard to think clearly. This feeling can become overwhelming enough that anxious people stop doing things or going places that make them feel anxious. Do you think this is happening to you? <br><br>
+<span class="font-italic">Anxiety is Normal. 1 in 7 children experience anxiety.<br/>
+Anxiety is not dangerous. It is temporary.<br/>
+Anxiety is adaptive. It helped our ancestors survive.<br/><br/></span>
+          
+<b>Why do we have anxiety?</b><br/>
+Imagine you are hiking in the woods and you come across a bear. What is the first thing you would do? You may run away from the bear, or you may simply freeze. Another reaction is to yell and wave your arms to appear big and scary. There are three ways humans react to danger: fight, flee, or freeze. <b>This is also known as a "fight-or-flight" response.</b> When we are anxious, we react in one of these ways, too. We may run away or avoid situations that make us anxious. Or we may freeze, such as when our minds go blank and we can’t think clearly. Or we may fight, get angry and lash out at people. Can you think of some ways you may fight, flee, or freeze because of anxious feelings?<br/><br/>
+
+<b>When should I know when to seek help?</b><br/>
+Take the example of a smoke alarm. Every house has one. An alarm can help protect us when there is an actual fire, but sometimes a smoke alarm is too sensitive and goes off when there isn’t really a fire (e.g. burning toast in toaster). Like a smoke alarm, anxiety is helpful when it works right. But when it goes off when there is no real danger, then we may want to fix it. <i>That</i> is a good sign to take action, and that begins with talking to a healthcare professional.<br/><br/>
+<b>What can I do right now to feel less anxious?</b>
+          <div class="row">
+              <div class="col-md-6"><ul>
+                  <li>Exercise</li>
+                  <li>Deep breathing</li>
+                  <li>Muscle relaxation</li>
+                  <li>Eating healthier</li>
+                  <li>Going for a walk</li>
+                  </ul></div>
+              <div class="col-md-6"><ul>
+                  <li>Listening to music</li>
+                  <li>Colouring books</li>
+                  <li>Spending time in nature</li>
+                  <li>Expressing yourself through art</li>
+                  <li>Reducing caffeine</li>
+                  </ul></div>
+          </div>
+    Remember, speak to a trusted adult or healthcare practitioner about anxiety.<br/><br/>
+         <b>References:</b><br/>
+          https://www.anxietycanada.com/sites/default/files/TalkingtoYourChildabout.pdf
+      </div>
+    </div>
+  </div>
+  <div class="card" id="education_depression">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Depression
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+          <b>What Is Depression?</b></br>
+Depression (major depressive disorder) is a medical illness that can interfere with your ability to handle your daily activities, such as sleeping, eating, or managing your school work. Depression can happen at any age. One in five youth experience depression at some point. <b>You are not alone</b> and <b>it is treatable.</b></br></br>
+                Do you feel any of the following?</br>
+        <ul>
+        <li>Do you constantly feel sad, anxious, or even “empty,” like you feel nothing?</li>
+        <li>Do you feel hopeless or like everything is going wrong?</li>
+        <li>Do you feel like you’re worthless or helpless? Do you feel guilty about things?</li>
+        <li>Do you feel irritable much of the time?</li>
+        <li>Do you find yourself spending more time alone and withdrawing from friends and family?
+</li>
+        <li>Are your grades dropping?</li>
+        <li>Have you lost interest or pleasure in activities and hobbies that you used to enjoy?
+</li>
+        <li>Have your eating or sleeping habits changed (eating or sleeping more than usual or less than usual)?</li>
+        <li>Do you always feel tired? Like you have less energy than normal or no energy at all?
+</li>
+        <li>Do you feel restless or have trouble sitting still?
+</li>
+            <li>Do you feel like you have trouble concentrating, remembering information, or making decisions?</li>
+            <li>Do you have aches or pains, headaches, cramps, or stomach problems without a clear cause?
+</li>
+            <li>Do you ever think about dying or suicide? Have you ever tried to harm yourself?
+</li>
+        </ul>
+
+
+
+
+
+
+
+       <b>What can I do right now to feel less depressed?</b>
+          <div class="row">
+              <div class="col-md-6"><ul>
+                  <li>Exercise</li>
+                  <li>Get the right amount of sleep</li>
+                  <li>Practice meditaton, yoga, or dance</li>
+                  <li>Spend time with family or friends</li>
+                  <li>Break down school tasks into smaller ones.</li>
+                  </ul></div>
+              <div class="col-md-6"><ul>
+                  <li>Listening to music</li>
+                  <li>Colouring books</li>
+                  <li>Spending time in nature</li>
+                  <li>Expressing yourself through art</li>
+                  <li>Reducing caffeine</li>
+                  </ul></div>
+          </div>
+    Remember, speak to a trusted adult or healthcare practitioner about depression.<br/><br/>
+         <b>References:</b><br/>
+       https://www.nimh.nih.gov/health/publications/teen-depression/index.shtml
+      </div>
+    </div>
+  </div>
+  <div class="card" id="education_eating">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Disordered Eating
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+<div class="card-body">
+          <b>What is disordered eating?</b></br>
+Disordered eating are the thoughts and behaviours associated with eating disorders. It is connected to how a person feels about themselves and things that are going on in their life. </br></br>
+                What are examples of disordered eating?</br>
+        <ul>
+            <li>Losing weight to meet an unrealistic body standard</li>
+            <li>Eating a lot of food then throwing up or exercising excessively</li>
+            <li>Never being happy with their weight</li>
+            <li>Fear, shame, or guilt about gaining weight or their eating</li>
+        </ul>
+I think I have disordered eating, how did I get it?</br>
+Disordered eating is a common way to cope with problems and emotions. This can occur from negative self-esteem, body image issues, difficult problems (e.g., family loss, moving away), or problems at school with grades or bullying.
+<br/><br/>
+<i>You are not alone. Recovery is possible with treatment, time, and support.</i>
+
+       <b>What can I do to reduce my disordered eating?</b>
+    Disordered eating is something to discuss with an adult. Like you would talk to a doctor about a physical problem such as a broken arm or leg, you can speak to a family or healthcare practitioner about disordered or any other mental distress.<br/><br/>
+         <b>References:</b><br/>
+       https://www.nimh.nih.gov/health/publications/teen-depression/index.shtml<br/>
+https://kidshelpphone.ca/get-info/what-eating-disorder
+      </div>
+    </div>
+  </div>
+  <div class="card" id="education_psu">
+    <div class="card-header" id="headingFour">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Problematic substance use
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+<div class="card-body">
+          <b>What is problematic substance use?</b></br>
+Many people will use substances (e.g. caffeine, prescription medication, alcohol, etc.) over the course of their lifetime without any problems. Substance use becomes a problem when it starts to have harmful effects on a person’s life (e.g. difficulties at school or at home, negative impacts on mental and/or physical health, etc.).</br></br>
+
+  <b>Why do people use substances?
+</b></br>
+People use substances for a variety of reasons. Some may use substances out of curiosity, or because they’re influenced by their friends, family and/or peers. Some use it to feel good and some use it to tune out their feelings.<br/><br/>
+Youth, like you, are vulnerable because your brain is still growing. You may also not know how much is "too much". You may also not consider all the long-term risks of substance use.</br></br>
+
+  <b>When is substance use "problematic"?</b></br>
+“Addiction” is a common term used to describe when a behaviour is out of control, usually in a harmful way. The meaning of addiction may vary by person or culture. When it comes to the risks and harms of substance use, we prefer to use the terms “problematic substance use” or “substance use problem,” which describe the use of a substance over time that causes negative effects (e.g. adverse physical, emotional and/or social impacts).</br></br>
+
+
+       <b>I think I have problematic substance use. What do I do?</b><br/>
+Struggling with substance use can be difficult, and completely stopping use is not easy. Withdrawal refers to the physical and emotional symptoms that a person experiences when they drastically reduce their substance use or completely stop using substances (going “cold turkey”). Signs and symptoms of withdrawal can include anything from mild discomfort (such as a headache) to seizures. Some of the effects of withdrawal can be fatal.<br/><br/>
+    You are not alone in this journey. Speak to a trusted adult or healthcare practitioner about problematic substance use.<br/><br/>
+         <b>References:</b><br/>
+       https://kidshelpphone.ca/get-info/what-substance-use
+      </div>
+    </div>
+  </div>
+
+
+<div class="card" id="education_harm">
+    <div class="card-header" id="headingFive">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Self-harm or suicide
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+<div class="card-body">
+          <b>What is self-harm?</b></br>
+Self-harm is when we hurt ourselves without suicidal intent, and this often leaves damage to our body.<br/><br/>
+        <b>What is suicide?</b><br/>
+        Suicide means ending your own life. It is sometimes a way for people to escape pain or suffering. When someone ends their own life, we say that they "died by suicide." A "suicide attempt" means that someone tried to end their life, but did not die. Often you will also hear "suicidal ideation", which means thinking about suicide or wanting to take your own life</br></br>
+
+  <b>Why do I feel like harming myself or comitting suicide?
+</b></br>
+Sometimes one can just have a thought about self-harm or suicide, and there is nothing more to it. Other times, the thoughts can be very real, and self-harm and suicide is perceivd as "way out" from a difficult time or stressor in your life. Self-harm can sometimes manifest into suicide.</br></br>
+
+  <b>Why do I feel this way?</b></br>
+There can be many reasons. Losing a parent, having an illness, family troubles, abusive family history, traumatic experiences, and lack of positive role models or friends are all factors that increase one's risk.</br></br>
+
+       <b>How do I get help?</b><br/>
+You may consider speaking to crisis services or your family doctor. Crisis services are available 24/7 to help provide you further resources and support you if you are in immediate danger. A family doctor can help you better understand these behaviours and refer you to a mental healthcare worker for further treatment.<br/><br/>
+      <b>24/7 Canada-wide Crisis Services:</b><br/>
+Kids Help Phone Text Services: CONNECT to 686868
+Canada Suicide Prevention Service: 1-833-456-4566
+<br/><br/>
+
+
+         <b>References:</b><br/>
+       https://www.nimh.nih.gov/health/publications/nimh-answers-questions-about-suicide/index.shtml<br/>
+https://www.suicideinfo.ca/resource/self-harm-and-suicide/
+      </div>
+    </div>
+  </div>
+
+        
+</div>
+    
+    </div>
+  
+
+    
+    </div>
+
+</div>
+
+    </div>
+    <h6 class="text-center mt-2 mb-2"><a href="https://johndejesus.com" class="text-muted">Return to johndejesus.com</a></h6>
+</div>
+</script>
+</body>
+</html>

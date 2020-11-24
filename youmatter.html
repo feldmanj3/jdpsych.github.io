@@ -41,10 +41,10 @@
         southeastasianfemale: {
             name: "Suzi",
             img: "images/vignettes/asianfemale.jpg",
-            phrase1: "Willpower is the most important,",
-            phrase2: "it rises from you heart.",
-            phrase3: "- Junko Tabei",
-            text: "There's a lot of shame and silence when it comes to mental illness in Asian communities. Sometimes, it's even considered strong to suppress negative feelings by my family and my friend's family. They think it will just go away. But once I realized that keeping it all inside isn't the answer, things started getting better once I opened up and started getting the help I need."
+            phrase1: "Baby eagles can never soar...",
+            phrase2: "...under their family's wing.",
+            phrase3: "- Liu Yang",
+            text: "There's a lot of shame and silence when it comes to mental illness in Asian communities. It's hard to fit the mold set in place by my parents <i>and</i> society at the same time. My parents think I'm strong for not showing my negative feelings or that I am overwhelmed. Even my friends and their families aren't as comfortable talking about mental health as I am. They think it will just go away. But once I realized that keeping it all inside isn't the answer, things started getting better once I opened up and started getting the help I need."
         },
         caucasianmale: {
             name: "Tom",
@@ -122,8 +122,8 @@ function vignettePersonlization (){
     }
 
 }
-function blackFemale() {
-    visitorProfile[2]["ethnicity"] = 1;
+function asianFemale() {
+    visitorProfile[2]["ethnicity"] = 7;
     visitorProfile[1]["gender"] = 2;
     
         symptomProfile.push(
@@ -395,7 +395,7 @@ visitorProfile.push({"suicide_thoughts":document.getElementById("suicide_thought
       <p class="card-text">YouMatter is a self-administered, risk assessment and mental health resource for children and adolescents. Components include: peer vignette, calming techniques, psychoeducation, safety planning, crisis service lists, and suggested therapeutic programs. Information is <b>personalized</b> based on demographic factors, potential psychological symptoms, and level of risk.<br/><br/><span class="text-danger">This application is a prototype created for learning purposes. It has not been validated nor should it be used for clinical purposes.</span><br />
 <p><b>Instructions:</b> Complete the following to receive personalized support.</p>
       
-      <h6>Tell us about yourself (Optional) <small></br/>Note: You are assumed as a black female (above 11 y/o) if you select no options.</small></h6>
+      <h6>Tell us about yourself (Optional) <small></br/>Note: You are assumed as a South East Asian female (above 11 y/o) if you select no options.</small></h6>
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -477,7 +477,7 @@ visitorProfile.push({"suicide_thoughts":document.getElementById("suicide_thought
     <h5 class="card-title">Screening for distress</h5>
     <p class="card-text">
         <div class="alert alert-warning" role="alert">
-  <b>Note from John:</b> Visitors wouldn't ordinarily see this box. For your convenience, click <button type="button" onclick="blackFemale()" class="btn btn-warning" style="padding: 2px !important; padding-top: 0px !important;">here</button> to move to the next step.<br/></br/>This will have the program assume you are a black female (older than 11 y/o) who potentially has anxiety, depression, disordered eating, and problematic substance use.
+  <b>Note from John:</b> Visitors wouldn't ordinarily see this box. For your convenience, click <button type="button" onclick="asianFemale()" class="btn btn-warning" style="padding: 2px !important; padding-top: 0px !important;">here</button> to move to the next step.<br/></br/>This will have the program assume you are a South East Asian female (older than 11 y/o) who potentially has anxiety, depression, disordered eating, and problematic substance use.
 </div>
     <b>Instructions:</b> Complete the below questions as honestly and accurately as you can: 
                   <label class="my-1 mr-2" for="eating1">Do you make yourself Sick because you feel uncomfortably full?</label>

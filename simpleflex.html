@@ -10,7 +10,22 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <style>
+        .order-select2 {
+            width: 210px;
+        }
+                  
                     @media (max-width: 767px) {
+                        .step4-buttons a {
+                            margin-bottom: 10px;
+                        }
+                        .order-select {
+                            text-align:center;
+                        }
+                         .order-select2 {
+                             width: 600px;
+            max-width: 300px;
+        }
+                       
                         body{
       overflow-x: hidden !important;
                         }
@@ -355,8 +370,8 @@ var makePause = {};
     </script>
       <div id="step4">
               <h5 class="card-title">Thanks for trying Simple Flex!</h5>
-          <p class="card-text">I hope you feel more relaxed now. See if you can keep practicing until you feel comfortable enough to practice without any help.
-              <div class="text-center mb-3">
+          <p class="card-text">I hope you enjoyed this application and feel more relaxed now. Try to eventually practice without this application. You may notice greater effects from having less distractions and more focus!
+              <div class="text-center mb-3 step4-buttons">
               <a onclick="stepThree()" class="btn btn-primary btn-lg" role="button">Try the exercise again</a>
 <a href="https://johndejesus.com/simpleflex.html" class="btn btn-secondary btn-lg" role="button">Return to beginning</a></div>
              
@@ -684,19 +699,19 @@ var makePause = {};
           }
       </style>
                <div class="row mt-2 px-3 order-select">
-
+<div class="col-md-6">
 <label>
   <input type="radio" id="body_order" name="body_order" value="customized" checked>
-    <div class="card text-center" style="width: 210px !important;">
+    <div class="card text-center order-select2">
   <div class="card-body">
     <h5 class="card-title">Customized</h5>
       <p class="card-text">You would like to select <b>which body parts</b> and <b>their order</b>.</p>
   </div>
 </div>
-</label>
+</label></div><div class="col-md-6">
 <label>
   <input type="radio" id="body_order" name="body_order" value="default" disabled>
-    <div class="card text-center" style="width: 210px !important;">
+    <div class="card text-center order-select2">
   <div class="card-body">
     <h5 class="card-title">Default*</h5>
     <p class="card-text"><small><ol class="text-left">
@@ -710,7 +725,7 @@ var makePause = {};
       </ol></small></p>
   </div>
 </div>
-</label>
+</label></div>
                    <br/>
       <small>*Note: Default is disabled to demonstrate the order customization screen.</small>
               </div>

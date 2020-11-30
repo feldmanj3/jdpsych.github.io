@@ -1,0 +1,730 @@
+<html>
+<head>
+    <title>Simple Flex by John</title>
+    <link rel="icon" href="images/logo_flex.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <style>
+                    @media (max-width: 767px) {
+                        body{
+      overflow-x: hidden !important;
+                        }
+                        .container {
+                            margin: 0 !important;
+                            padding: 0 10px 0 10px !important;
+                            
+                            overflow-x: hidden !important;
+                        }
+                        .card {
+                            margin-top: 0 !important;
+                        }
+                        .card-img-top {height: 200px;}
+                        
+                        
+                        
+                        
+}
+        body {
+
+        }
+        .card {margin-top: 20px;}
+        .card-img-top {height: 300px;
+        object-fit: cover;
+        object-position: top;
+        }
+        .row {
+        }
+        #defaultCanvas0 {display: none;}
+    </style>
+</head>
+<body>
+<script>
+
+const VisitorPreferences = [];
+
+function stepOne() {
+    VisitorPreferences.push(["body_model",$("input[name=body_model]:checked").val()])
+    clean_colour_body = $("input[name=colour_body]:checked").val();
+    if (clean_colour_body == "cccccc") {
+        clean_colour_body2 = "invert(93%) sepia(0%) saturate(187%) hue-rotate(171deg) brightness(90%) contrast(89%)";
+    } else if (clean_colour_body == "3b2219") {
+        clean_colour_body2 = "invert(11%) sepia(10%) saturate(3751%) hue-rotate(331deg) brightness(94%) contrast(87%)";
+    } else if (clean_colour_body == "a16e4b") {
+        clean_colour_body2 = "invert(48%) sepia(18%) saturate(1076%) hue-rotate(341deg) brightness(93%) contrast(91%)";
+    } else if (clean_colour_body == "d4aa78") {
+        clean_colour_body2 = "invert(92%) sepia(90%) saturate(681%) hue-rotate(307deg) brightness(89%) contrast(84%)";
+    } else if (clean_colour_body == "e6bc98") {
+        clean_colour_body2 = "invert(83%) sepia(12%) saturate(863%) hue-rotate(342deg) brightness(91%) contrast(98%)";
+    } else if (clean_colour_body == "ffe7d1") {
+        clean_colour_body2 = "invert(83%) sepia(26%) saturate(350%) hue-rotate(328deg) brightness(107%) contrast(103%";
+    } else if (clean_colour_body == "ffd90f") {
+        clean_colour_body2 = "invert(77%) sepia(97%) saturate(516%) hue-rotate(344deg) brightness(100%) contrast(102%)";
+    }
+    
+    
+    
+    VisitorPreferences.push(["colour_body",clean_colour_body2])
+                             
+    clean_colour_glow = $("input[name=colour_glow]:checked").val() 
+    
+    if (clean_colour_glow == "ea2c62") {
+        clean_colour_glow2 = "invert(32%) sepia(45%) saturate(5253%) hue-rotate(325deg) brightness(92%) contrast(99%)";
+    } else if (clean_colour_glow == "fc8906") {
+        clean_colour_glow2 = "invert(61%) sepia(34%) saturate(5701%) hue-rotate(360deg) brightness(106%) contrast(98%)";
+    } else if (clean_colour_glow == "fafbc3") {
+        clean_colour_glow2 = "invert(90%) sepia(30%) saturate(311%) hue-rotate(10deg) brightness(108%) contrast(97%)";
+    } else if (clean_colour_glow == "8ee971") {
+        clean_colour_glow2 = "invert(90%) sepia(10%) saturate(2351%) hue-rotate(48deg) brightness(101%) contrast(83%)";
+    } else if (clean_colour_glow == "b3e5f4") {
+        clean_colour_glow2 = "invert(88%) sepia(8%) saturate(932%) hue-rotate(152deg) brightness(97%) contrast(98%)";
+    } else if (clean_colour_glow == "f0cccc") {
+        clean_colour_glow2 = "invert(85%) sepia(15%) saturate(359%) hue-rotate(314deg) brightness(100%) contrast(88%)";
+    } else if (clean_colour_glow == "bd42ff") {
+        clean_colour_glow2 = "invert(33%) sepia(83%) saturate(2739%) hue-rotate(259deg) brightness(100%) contrast(103%)";
+    }
+                             
+    VisitorPreferences.push(["colour_glow",clean_colour_glow2])
+    
+    
+    VisitorPreferences.push(["body_order",document.getElementById("body_order").value])
+    
+    // Display 1 - retrieve parsed name for image
+    
+    body_model_name = VisitorPreferences[0][1];
+    if (body_model_name == "robot") {
+        document.getElementById("custom_choice1").innerHTML = "Robot";
+    } else if (body_model_name == "male") {
+        document.getElementById("custom_choice1").innerHTML = "Male";
+    } else if (body_model_name == "female") {
+        document.getElementById("custom_choice1").innerHTML = "Female";
+    }
+    
+    // document.getElementById("step1").style.display = "none";
+    // document.getElementById("step2").style.display = "initial";
+    
+    // Display 2 - show colour as a circle?
+    body_colour = VisitorPreferences[1][1];
+    document.getElementById("custom_choice2").style.background = "#"+clean_colour_body;
+    
+    // Display 3 - show colour as a circle.
+    glow_colour = VisitorPreferences[2][1];
+    document.getElementById("custom_choice3").style.background = "#"+clean_colour_glow;
+    
+    // Change body model
+    document.getElementById("body_background").src = "images/flex/body_"+VisitorPreferences[0][1]+".png";
+    
+    // Set body image and glow
+    document.getElementById("body_background").style.filter = clean_colour_body2;
+    document.getElementById("body_foreground").style.filter = clean_colour_glow2 + " drop-shadow(0px 0px 5px " + "#" + clean_colour_glow + ")";
+    
+    document.getElementById("step1").style.display = "none";
+    document.getElementById("step2").style.display = "initial";
+    console.log(VisitorPreferences);
+}
+    
+</script>
+    <style>
+        body {background-color: #f3fff5;}
+        .header { background-color: ; }
+        .text-slogan { color: #3e3e3ec7 !important; }
+        .text-title { color: #aee68b; }
+        .main-card {border: none !important;
+             box-shadow: 1px 1px 2px #eeeeee;
+        }
+        a#header_link:hover {
+            text-decoration: none;
+        }
+    </style>
+    
+<div class="container" id="description_hello">
+<div class="row justify-content-center">
+<div class="card main-card" style="width: 500px;">
+    <a id="header_link" href="https://johndejesus.com/simpleflex.html"><div class="header">
+    <div class="row justify-content-center">
+    <h1 style="float:left;" class="text-title text-center pt-2">Simple Flex</h1>
+    <img src="images/logo_flex.png" width ="50px" height="50px" class="mt-2 ml-2"/></div>
+    <h6 class="text-center text-slogan pb-2">designed and programmed by John DeJesus</h1>
+        </div></a>
+  <div class="card-body">
+
+<style>
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+     
+    border-radius: 5px;
+    
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+
+    background-color: lightgreen;
+}
+[type=radio]:hover + img {
+
+    background-color: lightgray;
+}    
+    step1 {display: none;}
+    #step2 {display: none;}
+    #step3 {display: none;}
+    #step4 {display: none;}
+    
+  .instructions-fading{animation:fading1 10s infinite}
+@keyframes fading1{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+    
+    .relax-fading{animation:fading2 30s infinite}
+@keyframes fading2{0%{opacity:0}33%{opacity:0}66%{opacity:1}100%{opacity:0}}
+    
+    img#body_background {
+        position: static;
+        z-index: 0 !important;
+        max-width: 100%;
+    }
+   img#body_foreground {
+    position: absolute !important;
+    z-index: 1 !important;
+    top: 0;
+    max-width: 100%;
+    left: 0;
+}
+    .instructions-fading {
+        margin:auto;
+    }
+    div#body_images {
+        position:relative;
+    }
+     @media (max-width: 767px) {
+    div#body_images {
+        
+    }
+    }
+    #relaxation_instructions, #relaxation_pause {
+        text-align: center !important;
+    }
+    .instructions_box {
+        height: 60px;
+        
+        background-color: #fdfdfd;
+        border-radius:5px;
+        padding:5px;
+    }
+</style>
+      <script>
+      let examplearray = ["arms", "head"];
+        
+    function replaceText (x){
+        
+    }
+          /*
+          
+          // Needs the instructions
+          // Needs the sleep function
+          // Needs
+          
+          */
+    
+          
+      </script>
+      <div id="step3">
+          
+          <!-- <h5 class="card-title">Instructions:</h5> -->
+          <div class="instructions_box">
+          <div id="relaxation_instructions" class="instructions-fading"></div>
+          <div id="relaxation_pause" class="relax-fading"></div>
+          </div>
+          <script>
+              
+          
+                
+              
+              //clean_list.length
+                 
+              function connectInstructions(x){
+                  
+                    
+                    let intake = clean_list[x];
+                    console.log("This is what we intake:");
+                    console.log(intake);
+                  
+                    let gender = VisitorPreferences[0][1];
+                    let clean_instructions = [];
+                    
+                    if (intake == "order_hands") {
+                        clean_instructions = ["Pretend to squeeze a lemon with your hands. Thumbs on the outside.","images/flex/"+gender+"/hands.png"];
+                    } else if (intake == "order_arms_shoulders") {
+                        clean_instructions = ["Raise your arms. Try to touch the ceiling.","images/flex/"+gender+"/arms.png"];
+                    } else if (intake == "order_shoulders_neck") {
+                        clean_instructions = ["Pretend you are a turtle and retract your head. Hold!","images/flex/"+gender+"/shoulders.png"];
+                    } else if (intake == "order_jaw") {
+                        clean_instructions = ["Bite down on your teeth OR Yawn as wide as you can.","images/flex/"+gender+"/jaw.png"];
+                    } else if (intake == "order_face_nose") {
+                        clean_instructions = ["Scrunch up your nose as hard as you can!","images/flex/"+gender+"/face.png"];
+                    } else if (intake == "order_stomach") {
+                        clean_instructions = ["A baby elephant is about to step on your stomach. Squeeze!","images/flex/"+gender+"/stomach.png"];
+                    } else if (intake == "order_legs_feet") {
+                        clean_instructions = ["Spread your toes and dig them into the mud.","images/flex/"+gender+"/legs.png"];
+                    }
+                    console.log("This is after the conditions");
+                    console.log(clean_instructions);
+                    //sleep(2000).then(() => { replaceInstructions(clean_instructions); });
+                    
+                    replaceInstructions(clean_instructions);
+                    
+                    
+    
+                    
+                }
+              
+var makePause = {};
+                function replaceInstructions(x){
+                let y = x;
+                console.log("This is replace instructions:");
+                console.log(y);
+                document.getElementById("relaxation_pause").innerHTML = "";
+                document.getElementById("body_foreground").src = y[1];
+                document.getElementById("relaxation_instructions").innerHTML = y[0];
+                  
+                makePause = setTimeout(replacePause,10000);
+                makePause;
+                 
+                }
+              
+                function replacePause(){
+                    document.getElementById("relaxation_pause").innerHTML = "Relax and breathe.<br/>Rest for 20 seconds...";
+                    document.getElementById("relaxation_instructions").innerHTML = "";
+                    document.getElementById("body_foreground").src = "";
+                    
+                    
+                    //document.getElementById("relaxation_pause").innerHTML = ""; 
+                    
+                }
+               
+             
+
+             
+              
+          </script>
+          <p class="card-text">
+              <div id="body_images">
+<img id="body_background" src="images/flex/body_male.png" />
+
+<div class="instructions-fading">
+    <img id="body_foreground" src="images/flex/male/hands.png" />
+</div>
+    
+                  
+                 
+        
+            </div>
+          <div class="text-center mt-4">
+          <a href="#" onclick="stepFour()" class="text-muted">Click here to conclude</a> (option only available for demo purposes)</div>
+          </p>
+      </div>
+    <script>
+        function stepFour() {
+            for(i=0; i<100; i++)
+{
+  window.clearTimeout(i);
+}
+            document.getElementById("step3").style.display = "none";
+            document.getElementById("step4").style.display = "initial";
+           
+            /*
+            
+                         <div id="relaxation_instructions" class="instructions-fading"></div>
+          <div id="relaxation_pause" class="relax-fading"></div>
+<div class="instructions-fading">
+    <img id="body_foreground" src="images/flex/male/hands.png" />
+</div>
+    */
+    
+        }
+    </script>
+      <div id="step4">
+              <h5 class="card-title">Thanks for trying Simple Flex!</h5>
+          <p class="card-text">I hope you feel more relaxed now. See if you can keep practicing until you have feel comfortable enough to practice without any help.
+              <div class="text-center mb-3">
+              <a onclick="stepThree()" class="btn btn-primary btn-lg" role="button">Try the exercise again</a>
+<a href="https://johndejesus.com/simpleflex.html" class="btn btn-secondary btn-lg" role="button">Return to beginning</a></div>
+             
+          
+          <h5>Exercise Variations</h5>
+        
+<div class="card bg-light">
+<div class="card-body">
+      
+          <b>Paired breathing</b><br/>
+          <p>Combine deep breathing techniques with your tense and release. <a href="simplebreath.html">Simple Breath</a> can help you practice the Box Breathing Method.</p>
+          <b>Paired wording</b><br/>
+          <p>It can be helpful to say a certain word or phrase to yourself as you slowly exhale (such as “relax”, “let go”, “stay calm”, “peace” “it will pass” etc.). This word or phrase will become associated with a relaxed state; eventually, saying this word alone can bring on a calm feeling.</p>
+          <b>Release Only</b><br/>
+          <p>Instead of tensing your muscles before relaxing them, try just the relaxation part.</p>
+          <b>Laying down</b><br/>
+          <p>Lay on your back on a comfortable surface. A yoga mat on a hard surface is perfect. Complete the same exercises, but substitute as appropiate (e.g., pointing toes and stretching calves instead of pressing toes into the mud).</p>
+    </div></div>
+          
+          <br/><b>References:</b><br/>
+          <small>
+          <p>https://www.anxietycanada.com/articles/how-to-do-progressive-muscle-relaxation/<br/>
+              https://kidshelpphone.ca/get-info/tension-release-exercise<br/>
+              https://depts.washington.edu/hcsats/PDF/TF-%20CBT/pages/4%20Emotion%20Regulation%20Skills/Client%20Handouts/Relaxation/Relaxation%20Script%20for%20Younger%20Children.pdf
+          </p></small>
+          
+          </p>
+      </div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+        $("ul").on('click','.remove',function(){
+    $(this).parents('li').remove();
+});
+    });
+</script>
+<style>
+    .remove {
+        background-color: red;
+        height: 20px;
+        width: 20px;
+        float: right;
+        text-align: center;
+        font-size: 10px;
+        color: white;
+        padding-top: 3px;
+        padding-left: 1px;
+        border-radius: 5px;
+    }
+    .remove:hover {
+        text-decoration: none;
+        color: white;
+        background-color: lightcoral;
+    }
+    .choice_colour {
+        
+        height: 20px;
+        width: 20px;
+        border-radius:10px;
+    }
+    .custom_choices div {
+        display: inline-block;
+    }
+    #intervention-screen { display: none;}
+</style>
+    <script>
+    /*
+    https://www.mottchildren.org/health-library/ta4146
+    https://depts.washington.edu/hcsats/PDF/TF-%20CBT/pages/4%20Emotion%20Regulation%20Skills/Client%20Handouts/Relaxation/Relaxation%20Script%20for%20Younger%20Children.pdf
+    https://kidshelpphone.ca/get-info/tension-release-exercise
+    */
+        
+    function stepThree (){
+        
+        document.getElementById("step3").style.display = "initial";
+        
+        // Refresh CSS animations
+        document.getElementById("relaxation_instructions").classList.remove("instructions-fading");
+        document.getElementById("relaxation_pause").classList.remove("relax-fading");
+        document.getElementById("body_foreground").id = "body_foreground_restart";
+        
+        document.getElementById("relaxation_instructions").classList.add("instructions-fading");
+        document.getElementById("relaxation_pause").classList.add("relax-fading");
+        document.getElementById("body_foreground_restart").id = "body_foreground";
+        
+        // Display correct DIVs
+        
+        
+        
+        cleanSend();
+        document.getElementById("step2").style.display = "none";
+        document.getElementById("step4").style.display = "none";
+    }
+    </script>
+          <div id="step2">
+              <h5 class="card-title">Customization</h5>
+              <div class="alert alert-light" role="alert">
+
+
+      Here are your exercise settings: <div class="custom_choices"><ul>
+              
+              <li><b>Body shape:</b> <div id="custom_choice1">&nbsp;</div></li> 
+              <li><b>Body colour:</b> <div id="custom_choice2" class="choice_colour">&nbsp;</div></li> 
+              <li><b>Glow colour:</b> <div id="custom_choice3" class="choice_colour">&nbsp;</div></li> 
+              <li><b>Relaxation order:</b> <span id="custom_choice4">Customized</span></li> 
+              </ul></div>
+              </div>
+              <b>Instructions:</b><br/>
+             Drag and drop to customize the order of relaxation. Remove as you would like. The unmodified order below is identical to the default option.<br/><br/>
+<ul id="sortable" class="list-group">
+  <li id="order_hands" class="list-group-item">Hands <a class="remove">X</a></li>
+  <li id="order_arms_shoulders" class="list-group-item">Arms and Shoulders <a    class="remove">X</a></li>
+  <li id="order_shoulders_neck" class="list-group-item">Neck <a class="remove">X</a></li>
+  <li id="order_jaw" class="list-group-item">Jaw <a class="remove">X</a></li>
+  <li id="order_face_nose" class="list-group-item">Face and Nose <a class="remove">X</a></li>
+  <li id="order_stomach" class="list-group-item">Stomach <a class="remove">X</a></li>
+  <li id="order_legs_feet" class="list-group-item">Legs and Feet <a class="remove">X</a></li>
+</ul>
+              
+              <div class="alert alert-info mt-3" role="alert">
+                  <h4 class="alert-heading">Exercise Instructions</h4>
+  You will have 10 seconds to tense and release. Tense the glowing muscle groups as hard as you can for at least 4 of the 10 seconds. You are provided 20 seconds between muscle groups to relax.
+</div>
+              <script>
+                //let list = [];
+                let list = [];
+                let clean_list = [];
+                //console.log(list);
+                //orderBody();
+                  
+                function orderBody(){
+                    //document.getElementById("step3").style.display = null;
+                    //document.getElementById("step3").style.display = "block";
+                    //document.getElementById("step3").removeAttribute("style");
+                    
+                    list = [];
+                    clean_list = [];
+                    var i;
+                    list = document.getElementById("sortable").children;
+                    for (i = 0; i < list.length; i++) {
+                        clean_list.push(list[i].id)
+                        }  
+                    console.log(clean_list);
+                    
+                    stepThree();
+                }
+                
+                var endStepFour = {};
+                var repeatInstructions = {};
+              
+                 function cleanSend(){
+                    
+                    endStepFour = setTimeout(stepFour, clean_list.length * 30000);
+                    stepFour;
+                    var i;
+                    for (i = 0; i < clean_list.length; i++) {
+                        console.log("this is i",i)
+                        
+                        let x = clean_list.length;
+                        console.log("this is x",x)
+                   
+                        
+                        
+                      
+                        repeatInstructions = setTimeout(connectInstructions, i * 30000, i);
+                        repeatInstructions;
+                      
+                        //
+                    
+                      
+                    }
+                
+                }
+                
+              </script>
+<a type="button" class="mt-3 btn btn-primary btn-lg btn-block" onclick="orderBody(); ">Start exercise</a>
+      </div>
+          <div id="step1">
+                  <h5 class="card-title">About this web application</h5>
+      <p class="card-text">Simple Flex is a basic visual guide for an adapted Progressive Muscle Relaxation. Visitors may select a realistic body image model, colours of the body and glow, and order of relaxation.<br /><br />This exercise will take 1 to 3 minutes depending on your customization. A <b>skip</b> is provided during the actual exercise for your convenience.<br /><br />
+           <b>Instructions:</b><br/>
+              Select the body model, colour of body and glow, and procedure order. <br />
+        <br/>   <b>1. Select a body:</b><br/>
+      
+          
+          
+          <style>
+              .body-select {
+                  margin-left: 0px;
+              }
+              .body-select > label > img {
+                  width: 150px;
+                  margin-right:2px;
+              }
+          </style>
+<div class="row body-select">
+
+        
+<label>
+  <input type="radio" id="body_model" name="body_model" value="robot" checked>
+  <img src="images/flex/body_robot.png" class="rounded float-left img-thumbnail img-fluid">
+</label>
+
+
+
+<label>
+  <input type="radio" id="body_model" name="body_model" value="female" >
+  <img src="images/flex/body_female.png" class="rounded float-left img-thumbnail img-fluid">
+</label>
+
+<label>
+  <input type="radio" id="body_model" name="body_model" value="male" >
+  <img src="images/flex/body_male.png" class="rounded float-left img-thumbnail img-fluid">
+</label>
+    
+    </div>
+    
+
+
+              
+            
+      
+      
+               <b>2. Select body colour:</b><br/></small>
+
+
+        <style>
+            .color-choice {
+                width: 50px;
+                height: 50px;
+                border-radius: 5px;
+                margin-right: 5px;
+                
+            }
+            .color-choice:hover {
+                border: 5px solid lightgrey;
+            }
+            [type=radio]:checked + div  {
+                border: 5px solid lightgreen;
+            }
+        </style>
+              <div class="mt-2 row px-3">
+<label>
+  <input type="radio" id="colour_body" name="colour_body" value="cccccc" checked>
+    <div class="color-choice" style="background-color: #cccccc;">&nbsp;</div>
+</label>                 
+<label>
+  <input type="radio" id="colour_body" name="colour_body" value="3b2219">
+    <div class="color-choice" style="background-color: #3b2219;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_body" name="colour_body" value="a16e4b" >
+    <div class="color-choice" style="background-color: #a16e4b;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_body" name="colour_body" value="d4aa78" >
+    <div class="color-choice" style="background-color: #d4aa78;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_body" name="colour_body" value="e6bc98" >
+    <div class="color-choice" style="background-color: #e6bc98;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_body" name="colour_body" value="ffe7d1" >
+    <div class="color-choice" style="background-color: #ffe7d1;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_body" name="colour_body" value="ffd90f" >
+    <div class="color-choice" style="background-color: #ffd90f;">&nbsp;</div>
+</label>
+                                  
+
+              </div>
+            
+  
+             <b>3. Select glow colour:</b> <br/>
+      This colour will signal which part of body to tense and release during the exercise. Selection inspired by colour therapy.
+               <div class="mt-2 row px-3">
+<label>
+  <input type="radio" id="colour_glow" name="colour_glow" value="ea2c62" checked>
+    <div class="color-choice" style="background-color: #ea2c62;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_glow" name="colour_glow" value="fc8906" >
+    <div class="color-choice" style="background-color: #fc8906;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_glow" name="colour_glow" value="fafbc3" >
+    <div class="color-choice" style="background-color: #fafbc3;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_glow" name="colour_glow" value="8ee971" >
+    <div class="color-choice" style="background-color: #8ee971;">&nbsp;</div>
+</label>
+<label>
+  <input type="radio" id="colour_glow" name="colour_glow" value="b3e5f4" >
+    <div class="color-choice" style="background-color: #b3e5f4;">&nbsp;</div>
+</label>
+
+<label>
+  <input type="radio" id="colour_glow" name="colour_glow" value="f0cccc">
+    <div class="color-choice" style="background-color: #f0cccc;">&nbsp;</div>
+</label>
+
+<label>
+  <input type="radio" id="colour_glow" name="colour_glow" value="bd42ff" >
+    <div class="color-choice" style="background-color: #bd42ff;">&nbsp;</div>
+</label>
+
+
+
+              </div>
+
+          
+        <b>4. Would you like to have a default or customized order?</b>
+      <style>
+          .order-select > label > div:hover {
+              background-color: lightgrey;
+          }
+   .order-select > label > div {
+              margin-right: 3px;
+          }
+      </style>
+               <div class="row mt-2 px-3 order-select">
+
+<label>
+  <input type="radio" id="body_order" name="body_order" value="customized" checked>
+    <div class="card text-center" style="width: 210px !important;">
+  <div class="card-body">
+    <h5 class="card-title">Customized</h5>
+      <p class="card-text">You would like to select <b>which body parts</b> and <b>their order</b>.</p>
+  </div>
+</div>
+</label>
+<label>
+  <input type="radio" id="body_order" name="body_order" value="default" disabled>
+    <div class="card text-center" style="width: 210px !important;">
+  <div class="card-body">
+    <h5 class="card-title">Default*</h5>
+    <p class="card-text"><small><ol class="text-left">
+      <li>Hands</li>
+      <li>Arms</li>
+      <li>Shoulder</li>
+      <li>Jaw</li>
+      <li>Face</li>
+      <li>Stomach</li>
+      <li>Legs</li>
+      </ol></small></p>
+  </div>
+</div>
+</label>
+                   <br/>
+      <small>*Note: Default is disabled to demonstrate the order customization screen.</small>
+              </div>
+      </p>
+    <div class="text-center"><a href="#" onclick="stepOne()" class="btn btn-primary align-center">Next</a>
+  </div>
+    </div>
+    </div>
+    
+</div>
+</div>
+
+    </div>
+    <h6 class="text-center mt-2 mb-2"><a href="https://johndejesus.com" class="text-muted">Return to johndejesus.com</a></h6>
+</div>
+</body>
+</html>

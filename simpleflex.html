@@ -407,6 +407,7 @@ var makePause = {};
       </div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="touch-dnd.js"></script>
 <script>
     /*
     $(function() {
@@ -417,6 +418,34 @@ var makePause = {};
 });
     });*/
     
+      $(function() {
+        
+          $('#sortable').sortable({ 
+
+  // default options
+  accept: '*',
+  activeClass: '',
+  cancel: 'input, textarea, button, select, option',
+  connectWith: false,
+  disabled: false,
+  forcePlaceholderSize: false,
+  handle: false,
+  initialized: false,
+  items: 'li, div',
+  placeholder: 'placeholder',
+  placeholderTag: null,
+  up<a href="https://www.jqueryscript.net/time-clock/">date</a>Handler: null,
+  receiveHandler: null
+  
+})
+          
+        $("ul").on('click','.remove',function(){
+    $(this).parents('li').remove();
+});
+    });
+    
+    
+    /*
      $(function() {
         //$('#sortable').draggable();
         $('#sortable').sortable();
@@ -426,7 +455,7 @@ var makePause = {};
     });
     
     
-
+*/
     
     
 </script>

@@ -328,7 +328,9 @@ var makePause = {};
                 function replacePause(){
                     document.getElementById("relaxation_pause").innerHTML = "Relax and breathe.<br/>Rest for 20 seconds...";
                     document.getElementById("relaxation_instructions").innerHTML = "";
+                    document.getElementById("body_foreground").removeAttribute('src');
                     document.getElementById("body_foreground").src = "";
+                    
                     
                     
                     //document.getElementById("relaxation_pause").innerHTML = ""; 

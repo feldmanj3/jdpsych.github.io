@@ -7,13 +7,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script> -->
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="assets/js/draganddrop.js"></script>
+ 
     <link rel="stylesheet" href="assets/css/draganddrop.css">
-    <script src="//code.jquery.com/jquery.min.js"></script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    
+   
+    
     <style>
         .order-select2 {
             width: 210px;
@@ -387,7 +390,7 @@ var makePause = {};
 <div class="card-body">
       
           <b>Paired breathing</b><br/>
-          <p>Combine deep breathing techniques with your tense and release. <a href="simplebreath.html">Simple Breath</a> can help you practice the Box Breathing Method. It's used by the US NAVY SEALS. <i>Are you tough enough?</i></p>
+          <p>Combine deep breathing techniques with your tense and release. <a href="simplebreath.html">Simple Breath</a> can help you practice the Box Breathing Method.</p>
           <b>Paired wording</b><br/>
           <p>It can be helpful to say a certain word or phrase to yourself as you slowly exhale (such as “relax”, “let go”, “stay calm”, “peace” “it will pass” etc.). This word or phrase will become associated with a relaxed state; eventually, saying this word alone can bring on a calm feeling.</p>
           <b>Release Only</b><br/>
@@ -405,62 +408,85 @@ var makePause = {};
           
           </p>
       </div>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="touch-dnd.js"></script>
-<script>
-    /*
-    $(function() {
-        $("#sortable").sortable();
-        $("#sortable").disableSelection();
-        $("ul").on('click','.remove',function(){
-    $(this).parents('li').remove();
-});
-    });*/
+
     
-    /*/$(function() {
+    <script type='text/javascript'>
         
-          $('#sortable').sortable({ 
-
-  // default options
-  accept: '*',
-  activeClass: '',
-  cancel: 'input, textarea, button, select, option',
-  connectWith: false,
-  disabled: false,
-  forcePlaceholderSize: false,
-  handle: false,
-  initialized: false,
-  items: 'li, div',
-  placeholder: 'placeholder',
-  placeholderTag: null,
-  up<a href="https://www.jqueryscript.net/time-clock/">date</a>Handler: null,
-  receiveHandler: null
-  
-})
+        
+      $(function() {
           
-    $("ul").on('click','.remove',function(){
-    $(this).parents('li').remove();
-});
-    //});
-    */
     
-    
-     $(function() {
-        //$('#sortable').draggable();
-        $('#sortable').sortable();
-        $("ul").on('click','.remove',function(){
-    $(this).parents('li').remove();
-});
-    });
-    
-    
+          
+        //grouped lists
+        $('ul.grouped').sortable({
+            
+            
+       
+            
+        });
+          
+        $('.remove').click(function(){
+            //$(this).parent().prev().remove();
+            //$(this).parent('div').remove();
+            $('.remove_container2 a:last').remove();
+            //$(this).remove(); // Removes X
+        });
+          
+          
+        $('#remove_list_1').click(function(){
+            $('div#list_container li:nth-child(1)').remove();
+        });
+          $('#remove_list_2').click(function(){
+            $('div#list_container li:nth-child(2)').remove();
+        });
+          $('#remove_list_3').click(function(){
+            $('div#list_container li:nth-child(3)').remove();
+        });
+          $('#remove_list_4').click(function(){
+            $('div#list_container li:nth-child(4)').remove();
+        });
+          $('#remove_list_5').click(function(){
+            $('div#list_container li:nth-child(5)').remove();
+        });
+          $('#remove_list_6').click(function(){
+            $('div#list_container li:nth-child(6)').remove();
+        });
+          $('#remove_list_7').click(function(){
+            $('div#list_container li:nth-child(7)').remove();
+        });
+          
 
-    
-    
-</script>
+        //div list
+        $('.list.parent').sortable({container: '.list', nodes: ':not(.list)'});
+
+        //off switch
+        $('.off').on('click', function() {
+            //console.log("Hello");
+          $('.sortable').each(function() { 
+             
+              $(this).sortable('destroy');
+              
+                                         });
+          $('.draggable').each(function() { $(this).draggable('destroy'); });
+        });
+          
+         
+          
+      });
+        
+    </script>
 <style>
+    .remove_container {
+        position: absolute;
+        z-index: 1;
+        right: 20px;
+    }
     .remove {
+        z-index: 1;
+        display:block;
+        margin-bottom: 20px;
+        top: -35px;
+        right:10px;
         background-color: red;
         height: 20px;
         width: 20px;
@@ -471,7 +497,9 @@ var makePause = {};
         padding-top: 3px;
         padding-left: 1px;
         border-radius: 5px;
+        margin: 14.5;
     }
+    
     .remove:hover {
         text-decoration: none;
         color: white;
@@ -532,15 +560,35 @@ var makePause = {};
               </div>
               <b>Instructions:</b><br/>
              Drag and drop to customize the order of relaxation. Remove as you would like. An unmodified order is identical to the default option.<br/><br/>
-
-<ul id="sortable" class="sortable list-group">
-  <li id="order_hands" class="list-group-item">Hands <a class="remove">X</a></li>
-  <li id="order_arms_shoulders" class="list-group-item">Arms and Shoulders <a    class="remove">X</a></li>
-  <li id="order_shoulders_neck" class="list-group-item">Neck <a class="remove">X</a></li>
-  <li id="order_jaw" class="list-group-item">Jaw <a class="remove">X</a></li>
-  <li id="order_face_nose" class="list-group-item">Face and Nose <a class="remove">X</a></li>
-  <li id="order_stomach" class="list-group-item">Stomach <a class="remove">X</a></li>
-  <li id="order_legs_feet" class="list-group-item">Legs and Feet <a class="remove">X</a></li>
+ <style>.test2 {
+     z-index: 1;
+     position: absolute;
+     right: -20px;}
+     .remove::after {
+         content: "";
+         top: 
+     }
+     #sortable p {
+         margin: 0;
+     }
+              </style>
+<ul id="sortable" class="grouped list-group">
+    <div class="remove_container">
+    <div class="remove_container2"><a id="remove_list_1" class="remove">X</a></div>
+    <div class="remove_container2"><a id="remove_list_2" class="remove">X</a></div>
+    <div class="remove_container2"><a id="remove_list_3" class="remove">X</a></div>
+    <div class="remove_container2"><a id="remove_list_4" class="remove">X</a></div>
+    <div class="remove_container2"><a id="remove_list_5" class="remove">X</a></div>
+    <div class="remove_container2"><a id="remove_list_6" class="remove">X</a></div>
+    <div class="remove_container2"><a id="remove_list_7" class="remove">X</a></div></div>
+    <div id="list_container">
+  <li id="order_hands" class="list-group-item">Hands</li>
+  <li id="order_arms_shoulders" class="list-group-item">Arms and Shoulders</li>
+  <li id="order_shoulders_neck" class="list-group-item">Neck</li>
+<li id="order_jaw" class="list-group-item">Jaw</li>
+  <li id="order_face_nose" class="list-group-item">Face and Nose</li>
+  <li id="order_stomach" class="list-group-item">Stomach</li>
+  <li id="order_legs_feet" class="list-group-item">Legs and Feet</li></div>
 </ul>
               
               <div class="alert alert-info mt-3" role="alert">

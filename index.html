@@ -57,7 +57,62 @@
     body {
 
     }
- @media screen and (min-width: 801px) { 
+    
+    .application_description_mobile {
+        display: none;
+    }
+    
+     @media screen and (max-width: 425px) { 
+
+          body {
+margin-bottom: 125px;
+    }
+         
+     div.row div.col:nth-child(1) {
+      
+         flex: 0 0 100%;
+            max-width: 100%;
+     }
+        div.row div.text-right:nth-child(2) {
+         
+            flex: 0 0 100%;
+            max-width: 100%;
+            text-align: left !important;
+     }
+           div.col-8 > a > button.btn-primary:nth-child(1) {
+               margin-top:4px;
+        
+            flex: 0 0 100%;
+            max-width: 100%;
+            text-align: left !important;
+     }
+             div.col-7 > a > button.btn-primary:nth-child(1) {
+               margin-top:5px;
+        
+            flex: 0 0 100%;
+            max-width: 100%;
+            text-align: left !important;
+     }
+            div.col-6 > a > button.btn-secondary:nth-child(1) {
+               position: initial !important;
+                  /*margin-top:5px;*/
+        margin-top: 5px;
+            flex: 0 0 100%;
+            max-width: 100%;
+            text-align: left !important;
+     }
+              div.col-3 > a > button.btn-secondary:nth-child(1) {
+               position: initial !important;
+                  /*margin-top:5px;*/
+        margin-top: 5px;
+            flex: 0 0 100%;
+            max-width: 100%;
+            text-align: left !important;
+     }
+}
+    
+ @media screen and (min-width: 801px) {
+     
 
      .container {
          width: 600px !important;
@@ -75,7 +130,10 @@
 }
      
 @media screen and (max-width: 800px) { 
-
+    
+    .application_description_mobile {
+        display: initial;
+    }
    .card-header > .row > div > a > button.btn.btn-primary {
     margin-bottom: 5px;
 }
@@ -223,7 +281,7 @@
 </nav>
     
 <div class="row mt-4">
-<h4 id="applications">Applications</h4><a class="mobile_link" id="applications_mobile"></a>
+<h4 id="applications">Applications</h4><a class="mobile_link" id="applications_mobile"></a><div class="application_description_mobile">Note for smartphone and tablet users: These webapps were designed to be free, accessible, and mobile-friendly. Enjoy :) </div>
     </div>
 <div class="row content_card">
 

@@ -434,25 +434,25 @@ var makePause = {};
           
           
         $('#remove_list_1').click(function(){
-            $('div#list_container li:nth-child(1)').remove();
+            $('p#list_container li:nth-child(1)').remove();
         });
           $('#remove_list_2').click(function(){
-            $('div#list_container li:nth-child(2)').remove();
+            $('p#list_container li:nth-child(2)').remove();
         });
           $('#remove_list_3').click(function(){
-            $('div#list_container li:nth-child(3)').remove();
+            $('p#list_container li:nth-child(3)').remove();
         });
           $('#remove_list_4').click(function(){
-            $('div#list_container li:nth-child(4)').remove();
+            $('p#list_container li:nth-child(4)').remove();
         });
           $('#remove_list_5').click(function(){
-            $('div#list_container li:nth-child(5)').remove();
+            $('p#list_container li:nth-child(5)').remove();
         });
           $('#remove_list_6').click(function(){
-            $('div#list_container li:nth-child(6)').remove();
+            $('p#list_container li:nth-child(6)').remove();
         });
           $('#remove_list_7').click(function(){
-            $('div#list_container li:nth-child(7)').remove();
+            $('p#list_container li:nth-child(7)').remove();
         });
           
 
@@ -571,6 +571,9 @@ var makePause = {};
      #sortable p {
          margin: 0;
      }
+     #list_container {
+         margin: 0;
+     }
               </style>
 <ul id="sortable" class="grouped list-group">
     <div class="remove_container">
@@ -581,14 +584,14 @@ var makePause = {};
     <div class="remove_container2"><a id="remove_list_5" class="remove">X</a></div>
     <div class="remove_container2"><a id="remove_list_6" class="remove">X</a></div>
     <div class="remove_container2"><a id="remove_list_7" class="remove">X</a></div></div>
-    <div id="list_container">
+    <p id="list_container">
   <li id="order_hands" class="list-group-item">Hands</li>
   <li id="order_arms_shoulders" class="list-group-item">Arms and Shoulders</li>
   <li id="order_shoulders_neck" class="list-group-item">Neck</li>
 <li id="order_jaw" class="list-group-item">Jaw</li>
   <li id="order_face_nose" class="list-group-item">Face and Nose</li>
   <li id="order_stomach" class="list-group-item">Stomach</li>
-  <li id="order_legs_feet" class="list-group-item">Legs and Feet</li></div>
+  <li id="order_legs_feet" class="list-group-item">Legs and Feet</li></p>
 </ul>
               
               <div class="alert alert-info mt-3" role="alert">

@@ -187,6 +187,12 @@ gtag('config', 'UA-118016609-1');
 }
      
 @media screen and (max-width: 800px) { 
+    .main-row {
+        margin: 0px;
+    }
+    #profile-column {
+        margin-bottom: 15px;
+    }
     .speech-bubble:after {
 	display:none;
     }
@@ -338,9 +344,9 @@ gtag('config', 'UA-118016609-1');
 <div class="card">
 
   <div class="card-body">
-      <div class="row mx-0 px-0 no-gutters">
-      <div class="col-md-4 text-center no-gutters">
-         <img src="images/profile.jpg" class="profile-picture rounded-circle img-thumbnail mt-3" width="150px"/>
+      <div class="row mx-0 px-0 no-gutters main-row">
+      <div class="col-md-4 text-center no-gutters" id="profile-column">
+         <img src="images/profile.jpg" class="profile-picture rounded-circle img-thumbnail" width="150px"/>
       </div>
       <div class="col-md-8  no-gutters">
           
